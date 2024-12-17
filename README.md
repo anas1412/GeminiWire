@@ -36,11 +36,11 @@ The result is standardized into a GeminiResponse object, ensuring consistent out
 
 1.  Clone the repository.
 2.  Execute `pip install -r requirements.txt`
-3.  copy the `.env.example` rename it to `.env`and put your `GEMINI_API_KEY=your_gemini_api_key`
+3.  Copy the `.env.example` rename it to `.env`and put your `GEMINI_API_KEY=your_gemini_api_key`
 
 ### **2\. Running the Service**
 
-1.  run `uvicorn main:app --reload`
+1.  Run `uvicorn main:app --reload`
 2.  Access the API documentation at http://127.0.0.1:8000/docs.
 
 ### **3\. Defining a New Function inside function_definitions.py**
