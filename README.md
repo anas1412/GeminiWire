@@ -35,7 +35,7 @@ The result is standardized into a GeminiResponse object, ensuring consistent out
 ### **1\. Setting Up**
 
 1.  Clone the repository.
-2.  pip install -r requirements.txt
+2.  Execute `pip install -r requirements.txt`
 3.  copy the `.env.example` rename it to `.env`and put your `GEMINI_API_KEY=your_gemini_api_key`
 
 ### **2\. Running the Service**
