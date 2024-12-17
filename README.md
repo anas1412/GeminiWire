@@ -1,7 +1,5 @@
 # GeminiWire
 
-AI-Powered Dynamic Function Orchestrator
-
 ## **Overview**
 
 **GeminiWire** is a framework where users can define, store, and securely execute custom functions. It integrates AI (like Google Gemini) to process the functions, and users can chain multiple functions together to create automated workflows. Think of it as a dynamic system for creating and managing personalized logic powered by AI and fasAPI.
