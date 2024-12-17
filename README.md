@@ -102,7 +102,7 @@ print("Character result:", character1)
 
 Example Output:
 
-```python
+```
 Character result: Alice, 22, possesses striking, sapphire-blue eyes that hold a hint of mischievousness behind their usually calm demeanor. Her shoulder-length, silver hair is often braided, framing a delicate face with a slightly pointed chin.  Clad in practical yet stylish clothing – often incorporating shades of blue and white – she carries herself with a quiet grace, belying a surprisingly sharp wit and hidden strength.
 ```
 
