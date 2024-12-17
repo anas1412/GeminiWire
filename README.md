@@ -40,7 +40,7 @@ The result is standardized into a GeminiResponse object, ensuring consistent out
 
 ### **2\. Running the Service**
 
-1.  Run `uvicorn main:app --reload`
+1.  Run `uvicorn server:app --reload`
 2.  Access the API documentation at http://127.0.0.1:8000/docs.
 
 ### **3\. Defining a New Function inside function_definitions.py**
