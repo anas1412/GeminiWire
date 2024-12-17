@@ -2,7 +2,7 @@
 
 ## **Overview**
 
-**GeminiWire** is a framework where users can define, store, and securely execute custom functions. It integrates AI (specifically Google Gemini) to process the functions, and users can chain multiple functions together to create automated workflows. Think of it as a dynamic system for creating and managing personalized logic powered by AI and fasAPI.
+**GeminiWire** is a framework where users can define, store, and securely execute custom prompts as functions. It integrates AI (specifically Google Gemini) to process the functions, and users can chain multiple functions together to create automated workflows. Think of it as a dynamic system for creating and managing personalized logic powered by AI and fasAPI.
 
 ## **Flow of Execution**
 
