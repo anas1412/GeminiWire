@@ -14,81 +14,41 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GEMINI_API_URL = os.getenv("GEMINI_API_URL")
 
 def execute(function_name: str, inputs: dict) -> GeminiResponse:
-    """
-    Executes a request to the Gemini API for a specified function.
-    :param function_name: Name of the function to execute (e.g., 'summarize').
-    :param inputs: The input parameters required by the function (e.g., text, language).
-    :return: A standardized GeminiResponse object.
-    """
     try:
         # Step 1: Validate and construct the GeminiRequest
         request = GeminiRequest(function_name=function_name, inputs=inputs)
 
-        # Step 2: Fetch the function dynamically from function_definitions.py
-        function_to_execute = get_function_from_registry(request.function_name)
+        # Step 2: Fetch function dynamically (centralized)
+        function_registry = load_functions()
+        function_to_execute = function_registry.get(request.function_name)
+
         if not function_to_execute:
             raise ValueError(f"Function '{request.function_name}' not found in function_definitions.py")
 
         # Step 3: Generate the prompt using the function
         prompt = function_to_execute(request.inputs)
 
-        # Step 4: Prepare the API payload
-        data = {
-            "contents": [
-                {
-                    "parts": [
-                        {
-                            "text": prompt
-                        }
-                    ]
-                }
-            ]
-        }
-
-        # Step 5: Construct the request URL with the API key
+        # Step 4: Prepare and send API payload
         url = f"{GEMINI_API_URL}?key={GEMINI_API_KEY}"
-
-        # Step 6: Send the POST request to the Gemini API
+        data = {"contents": [{"parts": [{"text": prompt}]}]}
         response = requests.post(url, json=data)
 
-        if response.status_code == 200:
-            # Parse the response JSON
-            response_json = response.json()
-
-            # Extract the first candidate's content
-            if "candidates" in response_json and len(response_json["candidates"]) > 0:
-                output_text = response_json["candidates"][0]["content"]["parts"][0]["text"]
-                return GeminiResponse(
-                    function_name=function_name,
-                    status="success",
-                    data=output_text,
-                    message=None
-                )
-            else:
-                # No candidates found in the response
-                return GeminiResponse(
-                    function_name=function_name,
-                    status="error",
-                    data=None,
-                    message="No candidates found in the response."
-                )
-        else:
-            # API returned an error
-            return GeminiResponse(
-                function_name=function_name,
-                status="error",
-                data=None,
-                message=f"Error {response.status_code}: {response.text}"
-            )
+        # Step 5: Process the response
+        return process_gemini_response(response, function_name)
+        
     except Exception as e:
-        # Handle unexpected errors
-        return GeminiResponse(
-            function_name=function_name,
-            status="error",
-            data=None,
-            message=str(e)
-        )
+        return GeminiResponse(function_name=function_name, status="error", data=None, message=str(e))
 
+def process_gemini_response(response, function_name):
+    if response.status_code == 200:
+        response_json = response.json()
+        if "candidates" in response_json and len(response_json["candidates"]) > 0:
+            output_text = response_json["candidates"][0]["content"]["parts"][0]["text"]
+            return GeminiResponse(function_name=function_name, status="success", data=output_text, message=None)
+        return GeminiResponse(function_name=function_name, status="error", data=None, message="No candidates found.")
+    else:
+        return GeminiResponse(function_name=function_name, status="error", data=None, message=f"Error {response.status_code}: {response.text}")
+        
 
 def get_function_from_registry(function_name: str):
     """
