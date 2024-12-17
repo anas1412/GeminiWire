@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GeminiWire - Dynamic AI Function Framework</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --primary-color: #3b82f6;
+        --secondary-color: #10b981;
+      }
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+        scroll-behavior: smooth;
+      }
+      .code-block {
+        background-color: #1e293b;
+        border-radius: 0.75rem;
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+      .feature-card {
+        transition: all 0.3s ease;
+      }
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-900 antialiased">
+    <nav class="bg-white shadow-md">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex">
+            <div class="flex-shrink-0 flex items-center">
+              <h1 class="text-2xl font-bold text-blue-600">GeminiWire</h1>
+            </div>
+            <div class="hidden sm:ml-6 sm:flex sm:space-x-8 mt-3">
+              <a
+                href="#features"
+                class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
+                >Features</a
+              >
+              <a
+                href="#setup"
+                class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
+                >Setup</a
+              >
+              <a
+                href="#examples"
+                class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
+                >Examples</a
+              >
+              <a
+                href="#roadmap"
+                class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
+                >Roadmap</a
+              >
+            </div>
+          </div>
+          <div class="hidden sm:ml-6 sm:flex sm:items-center">
+            <a
+              href="#"
+              class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700"
+            >
+              Get Started
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="py-16 text-center">
+        <div class="max-w-4xl mx-auto">
+          <h1
+            class="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-400 mb-4"
+          >
+            GeminiWire
+          </h1>
+          <p class="text-xl text-gray-600 mb-8">
+            A dynamic framework for defining, storing, and securely executing
+            custom AI-powered functions and workflows powered by Google's AI capabilities.
+          </p>
+          <div class="flex justify-center space-x-4">
+            <a
+              href="#setup"
+              class="px-8 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition transform hover:-translate-y-1 shadow-lg"
+            >
+              Get Started
+            </a>
+            <a
+            href="https://github.com/anas1412/GeminiWire"
+            class="px-8 py-3 border border-gray-300 text-gray-700 rounded-full font-semibold hover:bg-gray-100 transition transform hover:-translate-y-1 shadow-md flex items-center"
+            target="_blank" rel="noopener noreferrer"
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" d="M12 0C5.372 0 0 5.372 0 12c0 5.303 3.438 9.801 8.207 11.387.6.11.821-.261.821-.579 0-.287-.01-1.05-.015-2.062-3.338.727-4.043-1.589-4.043-1.589-.547-1.394-1.336-1.765-1.336-1.765-.987-.675.075-.661.075-.661 1.096.078 1.671 1.126 1.671 1.126.974 1.66 2.559 1.18 3.18.903.1-.705.381-1.18.692-1.453-2.666-.303-5.466-1.334-5.466-5.92 0-1.307.467-2.37 1.236-3.204-.124-.303-.535-.91-.075-1.887 0 0 1.004-.318 3.28 1.24.952-.264 1.974-.397 2.98-.403 1.005.006 2.027.139 2.98.403 2.276-1.558 3.28-1.24 3.28-1.24.46.977.05 1.584-.075 1.887.77.834 1.236 1.897 1.236 3.204 0 4.599-2.801 5.618-5.476 5.92.388.335.735.986.735 1.986 0 1.44-.015 2.604-.015 2.961 0 .319.222.692.825.578C20.565 21.801 24 17.303 24 12c0-6.628-5.372-12-12-12z" clip-rule="evenodd" />
+            </svg>
+            Github
+            </a>
+
+          </div>
+        </div>
+      </header>
+
+      
+
+            <main>
+              <section id="features" class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-white p-6 rounded-xl shadow-md feature-card">
+                  <div class="text-blue-600 text-3xl mb-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-12 w-12"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                      />
+                    </svg>
+                  </div>
+                  <h3 class="text-xl font-bold mb-2">
+                    Dynamic Function Chaining
+                  </h3>
+                  <p class="text-gray-600">
+                    Create and link AI-powered functions seamlessly
+                  </p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md feature-card">
+                  <div class="text-green-600 text-3xl mb-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-12 w-12"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </div>
+                  <h3 class="text-xl font-bold mb-2">Gemini AI Integration</h3>
+                  <p class="text-gray-600">
+                    Leverage Google's powerful AI capabilities
+                  </p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md feature-card">
+                  <div class="text-purple-600 text-3xl mb-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-12 w-12"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                      />
+                    </svg>
+                  </div>
+                  <h3 class="text-xl font-bold mb-2">Workflow Automation</h3>
+                  <p class="text-gray-600">
+                    Create complex AI-driven workflows effortlessly
+                  </p>
+                </div>
+              </section>
+
+              <section id="setup" class="mb-16">
+                <h2 class="text-3xl font-bold text-center mb-8">
+                  Getting Started
+                </h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                  <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">Installation</h3>
+                    <pre class="code-block"><code class="language-bash">
+# Clone the repository
+git clone https://github.com/anas1412/GeminiWire.git
+cd GeminiWire
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Configure API Key
+cp .env.example .env
+# Add your Gemini API key in .env
+
+# Start the service
+uvicorn server:app --reload
+                        </code></pre>
+                  </div>
+                  <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">
+                      Project Structure
+                    </h3>
+                    <pre class="code-block"><code class="language-bash">
+GeminiWire/
+│
+├── function_definitions.py  # Define custom functions
+├── server.py                # FastAPI server
+├── main.py                  # Main execution script
+├── requirements.txt         # Project dependencies
+└── .env                     # API key configuration
+└── ...                      # Rest of the project
+                        </code></pre>
+                  </div>
+                </div>
+              </section>
+
+              <section id="examples" class="mb-16">
+                <h2 class="text-3xl font-bold text-center mb-8">
+                  Function Examples
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                  <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">
+                      Character Generation Function
+                    </h3>
+                    <pre class="code-block"><code class="language-python">
+def generate_character(inputs: dict):
+    """
+    Generate a brief anime character description
+    """
+    name = inputs.get('name')
+    gender = inputs.get('gender')
+    age = inputs.get('age')
+    return f"Generate anime character description for {name}"
+
+# Example Usage
+result = execute_function("generate_character", {
+    "name": "Alice",
+    "gender": "female",
+    "age": 22
+})
+                        </code></pre>
+                  </div>
+                  <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">
+                      SQL Query Generation
+                    </h3>
+                    <pre class="code-block"><code class="language-python">
+def fetch_users_with_skill(inputs: dict):
+    """
+    Generate SQL query to fetch users with a specific skill
+    """
+    skill = inputs.get('skill')
+    return f"SELECT * FROM users WHERE skills LIKE '%{skill}%'"
+
+# Example Usage
+sql_query = execute_function("fetch_users_with_skill", {
+    "skill": "Cooking"
+})
+                        </code></pre>
+                  </div>
+                </div>
+
+                <div class="mt-8 bg-white p-6 rounded-xl shadow-md">
+                  <h3 class="text-xl font-semibold mb-4">
+                    Complex Workflow Example
+                  </h3>
+                  <pre class="code-block"><code class="language-python">
+# Chaining multiple AI-powered functions
+character1 = execute_function("generate_character", {
+    "name": "Alice", "gender": "female", "age": 22
+}).data
+
+character2 = execute_function("generate_character", {
+    "name": "Anas", "gender": "male", "age": 27
+}).data
+
+plot = "Coding an AI framework that integrates dynamic function execution"
+
+world = execute_function("generate_world", {
+    "plot": plot, 
+    "characters": [character1, character2]
+}).data
+
+print("Generated Narrative:", world)
+                    </code></pre>
+                </div>
+              </section>
+
+              <section
+                class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16 rounded-xl mb-16"
+              >
+                <div class="max-w-3xl mx-auto text-center">
+                  <h2 class="text-4xl font-bold mb-4">
+                    Ready to Transform Your Workflows?
+                  </h2>
+                  <p class="text-xl mb-8">
+                    Start building intelligent, AI-powered functions today
+                  </p>
+                  <a
+                    href="#"
+                    class="px-10 py-4 bg-white text-blue-600 rounded-full font-bold hover:bg-gray-100 transition"
+                  >
+                    Get Started Now
+                  </a>
+                </div>
+              </section>
+
+              <section id="roadmap" class="mb-16">
+                <h2 class="text-3xl font-bold text-center mb-8">
+                  Project Roadmap
+                </h2>
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                  <ul class="space-y-4">
+                    <li class="flex items-center">
+                      <svg
+                        class="w-6 h-6 mr-3 text-green-500"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      <span
+                        >Implement caching for frequently used functions</span
+                      >
+                    </li>
+                    <li class="flex items-center">
+                      <svg
+                        class="w-6 h-6 mr-3 text-gray-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      <span>Add NoSQL database for function registration</span>
+                    </li>
+                    <li class="flex items-center">
+                      <svg
+                        class="w-6 h-6 mr-3 text-gray-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      <span>Implement user authentication system</span>
+                    </li>
+                    <li class="flex items-center">
+                      <svg
+                        class="w-6 h-6 mr-3 text-gray-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      <span>Create user interface for function management</span>
+                    </li>
+                  </ul>
+                </div>
+              </section>
+            </main>
+
+            <footer class="bg-gray-100 py-12">
+              <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="md:flex md:justify-between">
+                  <div class="mb-6 md:mb-0">
+                    <h2 class="text-2xl font-bold text-blue-600 mb-4">
+                      GeminiWire
+                    </h2>
+                    <p class="text-gray-600">Dynamic AI Function Framework</p>
+                  </div>
+                  <div class="grid grid-cols-2 gap-8 md:grid-cols-3">
+                    <div>
+                      <h3
+                        class="text-sm font-semibold text-gray-800 uppercase mb-4"
+                      >
+                        Resources
+                      </h3>
+                      <ul class="text-gray-600">
+                        <li class="mb-2">
+                          <a href="#" class="hover:text-blue-600"
+                            >Documentation</a
+                          >
+                        </li>
+                        <li class="mb-2">
+                          <a href="#" class="hover:text-blue-600">GitHub</a>
+                        </li>
+                        <li class="mb-2">
+                          <a href="#" class="hover:text-blue-600">Tutorials</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h3
+                        class="text-sm font-semibold text-gray-800 uppercase mb-4"
+                      >
+                        Community
+                      </h3>
+                      <ul class="text-gray-600">
+                        <li class="mb-2">
+                          <a href="#" class="hover:text-blue-600">Discord</a>
+                        </li>
+                        <li class="mb-2">
+                          <a href="#" class="hover:text-blue-600">Twitter</a>
+                        </li>
+                        <li class="mb-2">
+                          <a href="#" class="hover:text-blue-600"
+                            >Stack Overflow</a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h3
+                        class="text-sm font-semibold text-gray-800 uppercase mb-4"
+                      >
+                        Legal
+                      </h3>
+                      <ul class="text-gray-600">
+                        <li class="mb-2">
+                          <a href="#" class="hover:text-blue-600"
+                            >MIT License</a
+                          >
+                        </li>
+                        <li class="mb-2">
+                          <a href="#" class="hover:text-blue-600"
+                            >Privacy Policy</a
+                          >
+                        </li>
+                        <li class="mb-2">
+                          <a href="#" class="hover:text-blue-600"
+                            >Terms of Service</a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-8 border-t border-gray-200 pt-8 text-center">
+                  <p class="text-base text-gray-600">
+                    &copy; 2024 GeminiWire. All rights reserved.
+                  </p>
+                </div>
+              </div>
+            </footer>
+          </div>
+
+          <script>
+            hljs.highlightAll();
+          </script>
+        </body>
+      </html>
+    </div>
+  </body>
+</html>
