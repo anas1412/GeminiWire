@@ -95,7 +95,7 @@ Run the main.py file to execute and chain multiple operations:
 Add your function inside main.py
 
 ```python
-character1 = execute("generate_character", {"name": "Alice", "gender": "female", "age": 22}).data
+character1 = execute_function("generate_character", {"name": "Alice", "gender": "female", "age": 22}).data
 print("Character result:", character1)
 
 ```
@@ -125,15 +125,15 @@ def generate_world(inputs: dict):
 2. Executing the request in main.py:
 
 ```python
-character1 = execute("generate_character", {"name": "Alice", "gender": "female", "age": 22}).data
+character1 = execute_function("generate_character", {"name": "Alice", "gender": "female", "age": 22}).data
 
-character2 = execute("generate_character", {"name": "Anas", "gender": "Male", "age": 27}).data
+character2 = execute_function("generate_character", {"name": "Anas", "gender": "Male", "age": 27}).data
 
 charactersList = [character1, character2]
 
 plot = "Coding GeminiWire, a framework where users can define, store, and securely execute custom functions. It integrates AI (like Google Gemini) to process the functions, and users can chain multiple functions together to create automated workflows. Think of it as a dynamic system for creating and managing personalized logic powered by AI and fasAPI."
 
-world = execute("generate_world", {"plot": plot, "characters": charactersList}).data
+world = execute_function("generate_world", {"plot": plot, "characters": charactersList}).data
 
 print("World result:", world)
 ```
@@ -176,7 +176,7 @@ def fetch_users_with_skill(inputs: dict):
 2. Executing the request in main.py:
 
 ```python
-SQLquery = execute("fetch_users_with_skill", {"skill": "Cooking"}).data
+SQLquery = execute_function("fetch_users_with_skill", {"skill": "Cooking"}).data
 print("SQL query:", SQLquery)
 ```
 
