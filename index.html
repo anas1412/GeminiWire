@@ -415,7 +415,7 @@ result = execute_function("generate_character", {
 # Function defined in function_definitions.py
 def fetch_users_with_skill(inputs: dict):
     skill = inputs.get('skill')
-    return f"SELECT * FROM users WHERE skills LIKE '%{skill}%'"
+    return f"Generate an SQL query to fetch users who have the '{skill}' skill from mysql DB. Only send the sql query in plain text dont use commas."
 
 # Example Usage in main.py
 sql_query = execute_function("fetch_users_with_skill", {
