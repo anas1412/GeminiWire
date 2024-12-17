@@ -394,9 +394,6 @@ GeminiWire/
                     <pre class="code-block"><code class="language-python">
 # Function defined in function_definitions.p
 def generate_character(inputs: dict):
-    """
-    Generate a brief anime character description
-    """
     name = inputs.get('name')
     gender = inputs.get('gender')
     age = inputs.get('age')
@@ -417,9 +414,6 @@ result = execute_function("generate_character", {
                     <pre class="code-block"><code class="language-python">
 # Function defined in function_definitions.py
 def fetch_users_with_skill(inputs: dict):
-    """
-    Generate SQL query to fetch users with a specific skill
-    """
     skill = inputs.get('skill')
     return f"SELECT * FROM users WHERE skills LIKE '%{skill}%'"
 

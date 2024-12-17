@@ -47,9 +47,6 @@ The result is standardized into a GeminiResponse object, ensuring consistent out
 
 ```python
 def generate_character(inputs: dict):
-    """
-    Generate a brief anime character description based on provided name, gender and age.
-    """
     name = inputs.get('name')
     gender = inputs.get('gender')
     age = inputs.get('age')
@@ -114,9 +111,6 @@ Character result: Alice, 22, possesses striking, sapphire-blue eyes that hold a 
 
 ```python
 def generate_world(inputs: dict):
-    """
-    Generate an anime world short story with the provided plot and characters.
-    """
     plot = inputs.get('plot')
     characters = ", ".join(map(str, inputs.get('characters', [])))
     return f"Generate an anime world short story with {plot} and {characters}."
@@ -166,9 +160,6 @@ Alice and Anas exchanged a glance.  A faint smile touched Alice’s lips, the sc
 
 ```python
 def fetch_users_with_skill(inputs: dict):
-    """
-    Generate an SQL query to fetch users who have a specific skill from mysql DB. Only send the sql query in plain text dont use commas.
-    """
     skill = inputs.get('skill')
     return f"Generate an SQL query to fetch users who have the '{skill}' skill from mysql DB. Only send the sql query in plain text dont use commas."
 ```
