@@ -5,12 +5,16 @@ from gemini_request import execute
 from function_utils import load_functions
 import hashlib
 import json
+import time
 
 # Function registry populated dynamically
 function_registry = load_functions()
 
 # In-memory cache (simple dictionary cache)
 cache = {}
+
+# Set expiration time to 15 minutes (in seconds)
+CACHE_EXPIRATION_TIME = 900  # 15 minutes
 
 def generate_cache_key(function_name, inputs):
     """
@@ -24,20 +28,28 @@ def execute_function(function_name: str, inputs: dict):
     """
     This function sends a request to the Gemini API for the specified function.
     Caching is implemented to avoid redundant API calls.
+    Cache expiration is checked before returning cached results.
     """
     # Generate a cache key based on function_name and inputs
     cache_key = generate_cache_key(function_name, inputs)
     
     # Check if the result is already cached
     if cache_key in cache:
-        print(f"Cache hit for function '{function_name}' with inputs {inputs}")
-        return cache[cache_key]  # Return cached result
+        cache_entry = cache[cache_key]
+        # Check if the cached result has expired
+        if time.time() - cache_entry['timestamp'] < CACHE_EXPIRATION_TIME:
+            print(f"Cache hit for function '{function_name}' with inputs {inputs}")
+            return cache_entry['result']  # Return cached result if it hasn't expired
+
+        # If expired, remove it from cache
+        print(f"Cache expired for function '{function_name}' with inputs {inputs}")
+        del cache[cache_key]
 
     print(f"Cache miss for function '{function_name}' with inputs {inputs}")
     
     # Execute via Gemini API
     result = execute(function_name, inputs)
     
-    # Cache the result from the API call
-    cache[cache_key] = result
+    # Store the result with timestamp in the cache
+    cache[cache_key] = {'result': result, 'timestamp': time.time()}
     return result
