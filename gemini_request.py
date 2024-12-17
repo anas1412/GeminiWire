@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import function_definitions
 import inspect
 from models import GeminiRequest, GeminiResponse
+from function_utils import load_functions
 
 # Load environment variables from the .env file
 load_dotenv()
@@ -96,7 +97,7 @@ def get_function_from_registry(function_name: str):
     :return: The function object, or None if not found.
     """
     # Get all functions from function_definitions dynamically
-    functions = {name: obj for name, obj in inspect.getmembers(function_definitions) if inspect.isfunction(obj)}
+    functions = functions = load_functions()
 
     # Return the function if it exists
     return functions.get(function_name, None)

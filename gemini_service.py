@@ -2,23 +2,10 @@ import os
 import inspect
 import function_definitions
 from gemini_request import execute
-
-# Dynamically populate the function registry from function_definitions.py
-def load_function_registry():
-    function_registry = {}
-    for name, obj in inspect.getmembers(function_definitions):
-        if inspect.isfunction(obj):
-            function_registry[name] = obj
-    
-    # Print the function names in a clean, user-friendly way
-    print("Loaded functions:")
-    for function_name in function_registry.keys():
-        print(f"- {function_name}")
-    print("\nRequesting from API...\n")
-    return function_registry
+from function_utils import load_functions
 
 # Function registry populated dynamically
-function_registry = load_function_registry()
+function_registry = load_functions()
 
 def execute_function(function_name: str, inputs: dict):
     """
