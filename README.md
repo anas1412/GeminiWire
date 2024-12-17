@@ -202,10 +202,10 @@ SQL query: SELECT * FROM users WHERE skills LIKE '%Cooking%'
 
 ## **Future Enhancements**
 
-- Implement caching for frequently used functions.
-- Extend function_definitions.py with more advanced NLP tasks
-- Add a noSQL database to register function_definitions and their inputs for each user.
-- Add a user authentication system to secure function calls.
-- Add a user interface for easy function management and execution.
-- Add detailed logging for debugging API and local function calls.
-- Support batch processing of multiple tasks in a single request.
+- [x] Implement caching for frequently used functions.
+- [ ] Extend function_definitions.py with more advanced NLP tasks
+- [ ] Add a noSQL database to register function_definitions and their inputs for each user.
+- [ ] Add a user authentication system to secure function calls.
+- [ ] Add a user interface for easy function management and execution.
+- [ ] Add detailed logging for debugging API and local function calls.
+- [ ] Support batch processing of multiple tasks in a single request.
