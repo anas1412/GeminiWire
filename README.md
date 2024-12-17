@@ -60,6 +60,8 @@ def generate_character(inputs: dict):
 
 #### Via FastAPI Endpoint:
 
+Use http://localhost:8000/docs to execute the JSON payload or use any REST API client to send the request.
+
 Send a POST request to /execute with the following JSON payload:
 
 ```json
