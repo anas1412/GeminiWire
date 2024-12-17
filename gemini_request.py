@@ -10,9 +10,7 @@ load_dotenv()
 
 # Get the Gemini API key from the environment
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-
-# Gemini API URL
-GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent"
+GEMINI_API_URL = os.getenv("GEMINI_API_URL")
 
 def execute(function_name: str, inputs: dict) -> GeminiResponse:
     """
