@@ -392,6 +392,7 @@ GeminiWire/
                       Character Generation Function
                     </h3>
                     <pre class="code-block"><code class="language-python">
+# Function defined in function_definitions.p
 def generate_character(inputs: dict):
     """
     Generate a brief anime character description
@@ -401,7 +402,7 @@ def generate_character(inputs: dict):
     age = inputs.get('age')
     return f"Generate anime character description for {name}, gender is {gender} and age is {age}"
 
-# Example Usage
+# Example Usage in main.py
 result = execute_function("generate_character", {
     "name": "Alice",
     "gender": "female",
@@ -414,6 +415,7 @@ result = execute_function("generate_character", {
                       SQL Query Generation
                     </h3>
                     <pre class="code-block"><code class="language-python">
+# Function defined in function_definitions.py
 def fetch_users_with_skill(inputs: dict):
     """
     Generate SQL query to fetch users with a specific skill
@@ -421,7 +423,7 @@ def fetch_users_with_skill(inputs: dict):
     skill = inputs.get('skill')
     return f"SELECT * FROM users WHERE skills LIKE '%{skill}%'"
 
-# Example Usage
+# Example Usage in main.py
 sql_query = execute_function("fetch_users_with_skill", {
     "skill": "Coding"
 })
