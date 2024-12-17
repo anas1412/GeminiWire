@@ -13,6 +13,9 @@ load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GEMINI_API_URL = os.getenv("GEMINI_API_URL")
 
+if not GEMINI_API_KEY or not GEMINI_API_URL:
+    raise EnvironmentError("GEMINI_API_KEY and GEMINI_API_URL must be set in the environment variables.")
+
 def execute(function_name: str, inputs: dict) -> GeminiResponse:
     try:
         # Step 1: Validate and construct the GeminiRequest
@@ -48,7 +51,7 @@ def process_gemini_response(response, function_name):
         return GeminiResponse(function_name=function_name, status="error", data=None, message="No candidates found.")
     else:
         return GeminiResponse(function_name=function_name, status="error", data=None, message=f"Error {response.status_code}: {response.text}")
-        
+
 
 def get_function_from_registry(function_name: str):
     """
