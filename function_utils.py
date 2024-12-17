@@ -15,7 +15,7 @@ def load_functions():
     
     if not functions:
         logger.warning("No functions were loaded from function_definitions.py.")
-    else:
-        logger.info(f"Loaded {len(functions)} functions from function_definitions.py.")
+    #else:
+    #    logger.info(f"Loaded {len(functions)} functions from function_definitions.py.")
     
     return functions
