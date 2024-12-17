@@ -60,7 +60,7 @@ def get_function_from_registry(function_name: str):
     :return: The function object, or None if not found.
     """
     # Get all functions from function_definitions dynamically
-    functions = functions = load_functions()
+    functions = load_functions()
 
     # Return the function if it exists
     return functions.get(function_name, None)
