@@ -17,7 +17,7 @@ def add_wire(function_name: str, inputs: list, description: str):
             for param in inputs:
                 input_lines += f"    {param} = inputs.get('{param}')\n"
 
-        # Generate function code without input lines if no inputs are given
+        # Generate function code, with or without input lines
         function_code = f"def {function_name}(inputs: dict):\n{input_lines}    return f'{description}'\n"
 
         # Add the new function to the file
@@ -47,7 +47,7 @@ def update_wire(function_name: str, inputs: list, description: str):
         if not re.search(pattern, content):
             raise ValueError(f"Function '{function_name}' not found.")
 
-        # Remove the old function entirely
+        # Remove the old function entirely (matching the function pattern)
         updated_content = re.sub(pattern, "", content)
 
         # Generate the new function code
@@ -65,6 +65,10 @@ def update_wire(function_name: str, inputs: list, description: str):
         # Write the updated content back to the file
         with open(FUNCTIONS_FILE, "w") as f:
             f.write(updated_content)
+
+        # Reload the functions registry after updating the function
+        global function_registry
+        function_registry = load_functions()
 
         print(f"Function '{function_name}' updated successfully.")
     except ValueError as e:
@@ -85,7 +89,7 @@ def delete_wire(function_name: str):
         if not re.search(pattern, content):
             raise ValueError(f"Function '{function_name}' not found.")
 
-        # Remove the function entirely
+        # Remove the function entirely (match and remove the function)
         updated_content = re.sub(pattern, "", content)
 
         # Write the updated content back to the file
@@ -102,12 +106,13 @@ def delete_wire(function_name: str):
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
 
+
 def list_wires():
     try:
         with open(FUNCTIONS_FILE, "r") as f:
             content = f.read()
 
-        # Find all function names
+        # Find all function names by looking for the function signature
         function_names = re.findall(r"def (\w+)\(inputs: dict\):", content)
         return function_names
     except Exception as e:
