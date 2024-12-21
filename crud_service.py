@@ -13,10 +13,11 @@ def add_wire(function_name: str, inputs: list, description: str):
 
         # Generate the function signature and inputs handling code
         input_lines = ""
-        for param in inputs:
-            input_lines += f"    {param} = inputs.get('{param}')\n"
+        if inputs:  # Only add input lines if inputs are provided
+            for param in inputs:
+                input_lines += f"    {param} = inputs.get('{param}')\n"
 
-        # Remove unnecessary blank lines and excessive indentation
+        # Generate function code without input lines if no inputs are given
         function_code = f"def {function_name}(inputs: dict):\n{input_lines}    return f'{description}'\n"
 
         # Add the new function to the file
@@ -51,8 +52,9 @@ def update_wire(function_name: str, inputs: list, description: str):
 
         # Generate the new function code
         input_lines = ""
-        for param in inputs:
-            input_lines += f"    {param} = inputs.get('{param}')\n"
+        if inputs:  # Only add input lines if inputs are provided
+            for param in inputs:
+                input_lines += f"    {param} = inputs.get('{param}')\n"
 
         # Format the new function code without extra blank lines
         function_code = f"def {function_name}(inputs: dict):\n{input_lines}    return f'{description}'\n"

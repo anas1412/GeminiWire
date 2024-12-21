@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from gemini_service import execute
 from crud_service import add_wire, update_wire, delete_wire, list_wires
@@ -8,6 +9,15 @@ import inspect
 import os
 
 app = FastAPI()
+
+# Allow CORS for local development
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # React app origin
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 ##################################################################################################
 
