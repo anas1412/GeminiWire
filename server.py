@@ -2,7 +2,8 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from gemini_service import execute
-from crud_service import add_wire, update_wire, delete_wire, list_wires
+from crud_service import add_wire, update_wire, delete_wire, list_wires, fetch_wire
+from models import WireFunctionRequest, WireFunctionResponse
 from typing import Dict, Any, List
 import wire_definitions 
 import inspect
@@ -50,15 +51,12 @@ async def wire_function(request: GeminiRequest):
 
 ##################################################################################################
 
-# Model for input data for functions like add_wire, update_wire, etc.
-class WireFunctionRequest(BaseModel):
-    function_name: str
-    inputs: List[str]  # List of input parameter names
-    description: str   # Description for the wire function
 
-# Model for output data
-class WireFunctionResponse(BaseModel):
-    message: str
+
+
+    
+
+
 
 @app.post("/wire/add", response_model=WireFunctionResponse)
 async def create_wire(request: WireFunctionRequest):
@@ -89,5 +87,20 @@ async def get_all_wires():
     try:
         wires = list_wires()
         return wires
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/wire/{function_name}", response_model=WireFunctionRequest)
+async def get_wire(function_name: str):
+    try:
+        wire_details = fetch_wire(function_name)
+        if wire_details:
+            return WireFunctionRequest(
+                function_name=wire_details["function_name"],
+                inputs=wire_details["inputs"],
+                description=wire_details["description"],
+            )
+        else:
+            raise HTTPException(status_code=404, detail=f"Function '{function_name}' not found.")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

@@ -37,3 +37,5 @@ def fetch_users_with_skill(inputs: dict):
     skill = inputs.get('skill')
     return f"Generate an SQL query to fetch users who have the '{skill}' skill from mysql DB. Only send the sql query in plain text dont use commas."
 
+def test(inputs: dict):
+    return f'return a very short brief dummy test message'

@@ -1,5 +1,6 @@
 import re
 from function_utils import load_functions
+from models import WireFunctionRequest
 
 FUNCTIONS_FILE = "wire_definitions.py"
 
@@ -118,3 +119,48 @@ def list_wires():
     except Exception as e:
         print(f"An unexpected error occurred while listing functions: {e}")
         return []
+
+def fetch_wire(function_name: str):
+    try:
+        with open(FUNCTIONS_FILE, "r") as f:
+            content = f.read()
+
+        # Regex to find the function definition and its entire body
+        pattern = rf"def {function_name}\(inputs: dict\):\n(    .*\n)*"
+
+        # Check if the function exists
+        match = re.search(pattern, content)
+        if not match:
+            raise ValueError(f"Function '{function_name}' not found.")
+
+        # Extract the matched function code
+        wire_code = match.group(0)
+
+        # Extract inputs and description from the wire function
+        inputs = []
+        description = ""
+        
+        # Split the wire code into lines to process it
+        lines = wire_code.splitlines()
+
+        # Extract inputs (assuming each input is fetched using inputs.get() in the code)
+        for line in lines:
+            if '=' in line:  # Assuming input parameters are being fetched like `param = inputs.get('param')`
+                inputs.append(line.split('=')[0].strip())
+
+        # Description is assumed to be after 'return' statement (you can adjust based on your actual code structure)
+        if 'return' in lines[-1]:
+            description = lines[-1].split('return')[1].strip()
+
+        return {
+            "function_name": function_name,
+            "inputs": inputs,
+            "description": description,
+        }
+
+    except ValueError as e:
+        print(f"Error: {e}")
+        return None
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return None
