@@ -22,10 +22,8 @@ def reverse_string(inputs: dict):
     text = inputs.get("text")
     return f"Reverse this string: {text}"
 
-# Function to translate the expense amount to words
 def translate_amount(inputs: dict):
     amount = inputs.get('amount')
-    # This function assumes that the number is passed as an integer
     return f"Translate the amount {amount} into words."
 
 def generate_character(inputs: dict):

@@ -18,7 +18,7 @@ class GeminiResponse(BaseModel):
     outputs: str  # Expect a string output, not a dictionary
 
 @app.post("/execute", response_model=GeminiResponse)
-async def execute_function(request: GeminiRequest):
+async def wire_function(request: GeminiRequest):
     try:
         # Call the gemini_service to execute the request and get the response
         response = execute(request.function_name, request.inputs)

@@ -7,6 +7,6 @@ class GeminiRequest(BaseModel):
 
 class GeminiResponse(BaseModel):
     function_name: str
-    status: str  # "success" or "error"
-    data: Optional[Any]  # The actual output of the function, can be of any type
-    message: Optional[str] = None  # Optional message for errors or additional info
+    status: str
+    data: Optional[Any]
+    message: Optional[str] = None

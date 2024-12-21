@@ -21,7 +21,7 @@ def generate_cache_key(function_name, inputs):
     inputs_str = json.dumps(inputs, sort_keys=True)
     return hashlib.md5((function_name + inputs_str).encode()).hexdigest()
 
-def execute_function(function_name: str, inputs: dict):
+def wire_function(function_name: str, inputs: dict):
     # Generate a cache key based on function_name and inputs
     cache_key = generate_cache_key(function_name, inputs)
     
