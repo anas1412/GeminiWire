@@ -2,10 +2,14 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from gemini_service import execute
 from crud_service import add_function, update_function, delete_function, list_functions
-from typing import Dict, Any
-import function_definitions  # Import the module that contains the function definitions
+from typing import Dict, Any, List
+import function_definitions 
+import inspect
+import os
 
 app = FastAPI()
+
+##################################################################################################
 
 # Define the request model for Gemini input (no need for "prompt")
 class GeminiRequest(BaseModel):
@@ -18,10 +22,10 @@ class GeminiResponse(BaseModel):
     outputs: str  # Expect a string output, not a dictionary
 
 
+
 @app.post("/execute", response_model=GeminiResponse)
 async def wire_function(request: GeminiRequest):
     try:
-        # Execute the function and capture the response
         response = execute(request.function_name, request.inputs)
         
         if response.status == "success":
@@ -34,12 +38,22 @@ async def wire_function(request: GeminiRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-# Define the request model for CRUD operations
+##################################################################################################
+
 class FunctionCRUDRequest(BaseModel):
     name: str
     code: str
 
-# Route to add a new function
+@app.post("/execute", response_model=GeminiResponse)
+async def wire_function(request: GeminiRequest):
+    try:
+        response = execute(request.function_name, request.inputs)
+        if response.status != "success":
+            raise HTTPException(status_code=400, detail=response.message)
+        return GeminiResponse(function_name=request.function_name, outputs=str(response.data))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.post("/function")
 async def create_function(request: FunctionCRUDRequest):
     try:
@@ -48,7 +62,6 @@ async def create_function(request: FunctionCRUDRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# Route to update an existing function
 @app.put("/function")
 async def update_existing_function(request: FunctionCRUDRequest):
     try:
@@ -57,7 +70,6 @@ async def update_existing_function(request: FunctionCRUDRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# Route to delete a function
 @app.delete("/function/{name}")
 async def delete_existing_function(name: str):
     try:
@@ -66,10 +78,11 @@ async def delete_existing_function(name: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# Route to list all available functions
 @app.get("/functions")
 async def get_all_functions():
     try:
         return {"functions": list_functions()}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
+
+##################################################################################################
