@@ -1,11 +1,9 @@
 import os
-import inspect
-import function_definitions
-from gemini_request import execute
-from function_utils import load_functions
+import time
 import hashlib
 import json
-import time
+from gemini_request import execute
+from function_utils import load_functions
 
 # Function registry populated dynamically
 function_registry = load_functions()
@@ -16,12 +14,34 @@ cache = {}
 # Set expiration time to 15 minutes (in seconds)
 CACHE_EXPIRATION_TIME = 900  # 15 minutes
 
+# Path to the function definitions file
+FUNCTIONS_FILE = "function_definitions.py"
+
+# Track the last modified timestamp of the function definitions file
+last_modified_time = os.path.getmtime(FUNCTIONS_FILE)
+
 def generate_cache_key(function_name, inputs):
     # Convert the inputs to a sorted JSON string to ensure consistency
     inputs_str = json.dumps(inputs, sort_keys=True)
     return hashlib.md5((function_name + inputs_str).encode()).hexdigest()
 
+def check_for_function_updates():
+    global last_modified_time
+    # Check if the function definitions file has been modified
+    current_modified_time = os.path.getmtime(FUNCTIONS_FILE)
+    if current_modified_time != last_modified_time:
+        print("Function definitions file has been updated. Resetting cache.")
+        last_modified_time = current_modified_time
+        return True
+    return False
+
 def wire_function(function_name: str, inputs: dict):
+    # Check if the function definitions have been modified and reset the cache
+    if check_for_function_updates():
+        # Reset the cache
+        global cache
+        cache = {}
+    
     # Generate a cache key based on function_name and inputs
     cache_key = generate_cache_key(function_name, inputs)
     
@@ -42,6 +62,9 @@ def wire_function(function_name: str, inputs: dict):
     # Execute via Gemini API
     result = execute(function_name, inputs)
     
-    # Store the result with timestamp in the cache
-    cache[cache_key] = {'result': result, 'timestamp': time.time()}
+    # Only cache the result if it's not None
+    if result is not None:
+        # Store the result with timestamp in the cache
+        cache[cache_key] = {'result': result, 'timestamp': time.time()}
+    
     return result

@@ -43,3 +43,11 @@ def fetch_users_with_skill(inputs: dict):
 
 
 
+
+
+def multiply(inputs: dict):
+    
+    num1 = inputs.get('num1')
+    num2 = inputs.get('num2')
+    return f'The result of multiplying {num1} by {num2}. Only send the result'
+    
