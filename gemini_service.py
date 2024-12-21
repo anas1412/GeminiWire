@@ -1,6 +1,6 @@
 import os
 import inspect
-import function_definitions
+import wire_definitions
 from gemini_request import execute
 from function_utils import load_functions
 import hashlib
@@ -17,7 +17,7 @@ cache = {}
 CACHE_EXPIRATION_TIME = 900  # 15 minutes
 
 # Track the last modified time of the function definitions file
-FUNCTION_DEFINITIONS_FILE = "function_definitions.py"
+FUNCTION_DEFINITIONS_FILE = "wire_definitions.py"
 last_mod_time = os.path.getmtime(FUNCTION_DEFINITIONS_FILE)
 
 def generate_cache_key(function_name, inputs):

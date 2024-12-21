@@ -7,12 +7,12 @@ import re
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-FUNCTIONS_FILE = "function_definitions.py"
+FUNCTIONS_FILE = "wire_definitions.py"
 
 def load_functions():
     try:
         # Import the functions file dynamically
-        spec = importlib.util.spec_from_file_location("function_definitions", FUNCTIONS_FILE)
+        spec = importlib.util.spec_from_file_location("wire_definitions", FUNCTIONS_FILE)
         function_definitions_module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(function_definitions_module)
 

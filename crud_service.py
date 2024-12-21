@@ -1,9 +1,9 @@
 import re
 from function_utils import load_functions
 
-FUNCTIONS_FILE = "function_definitions.py"
+FUNCTIONS_FILE = "wire_definitions.py"
 
-def add_function(function_name: str, inputs: list, description: str):
+def add_wire(function_name: str, inputs: list, description: str):
     try:
         # Check if the function already exists
         with open(FUNCTIONS_FILE, "r") as f:
@@ -34,7 +34,7 @@ def add_function(function_name: str, inputs: list, description: str):
         print(f"An unexpected error occurred: {e}")
 
 
-def update_function(function_name: str, inputs: list, description: str):
+def update_wire(function_name: str, inputs: list, description: str):
     try:
         with open(FUNCTIONS_FILE, "r") as f:
             content = f.read()
@@ -71,7 +71,7 @@ def update_function(function_name: str, inputs: list, description: str):
         print(f"An unexpected error occurred: {e}")
 
 
-def delete_function(function_name: str):
+def delete_wire(function_name: str):
     try:
         with open(FUNCTIONS_FILE, "r") as f:
             content = f.read()
@@ -100,7 +100,7 @@ def delete_function(function_name: str):
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
 
-def list_functions():
+def list_wires():
     try:
         with open(FUNCTIONS_FILE, "r") as f:
             content = f.read()

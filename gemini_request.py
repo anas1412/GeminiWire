@@ -1,7 +1,7 @@
 import os
 import requests
 from dotenv import load_dotenv
-import function_definitions
+import wire_definitions
 import inspect
 from models import GeminiRequest, GeminiResponse
 from function_utils import load_functions
@@ -26,7 +26,7 @@ def execute(function_name: str, inputs: dict) -> GeminiResponse:
         function_to_execute = function_registry.get(request.function_name)
 
         if not function_to_execute:
-            raise ValueError(f"Function '{request.function_name}' not found in function_definitions.py")
+            raise ValueError(f"Function '{request.function_name}' not found in wire_definitions.py")
 
         # Step 3: Generate the prompt using the function
         prompt = function_to_execute(request.inputs)
@@ -54,12 +54,7 @@ def process_gemini_response(response, function_name):
 
 
 def get_function_from_registry(function_name: str):
-    """
-    Dynamically fetch the function from the function_definitions module.
-    :param function_name: The name of the function to retrieve.
-    :return: The function object, or None if not found.
-    """
-    # Get all functions from function_definitions dynamically
+    # Get all functions from wire_definitions dynamically
     functions = load_functions()
 
     # Return the function if it exists

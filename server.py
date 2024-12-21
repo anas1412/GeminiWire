@@ -1,9 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from gemini_service import execute
-from crud_service import add_function, update_function, delete_function, list_functions
+from crud_service import add_wire, update_wire, delete_wire, list_wires
 from typing import Dict, Any, List
-import function_definitions 
+import wire_definitions 
 import inspect
 import os
 
@@ -19,7 +19,7 @@ class GeminiRequest(BaseModel):
 # Define the response model for Gemini output
 class GeminiResponse(BaseModel):
     function_name: str  # Function name included in the response for logging
-    outputs: str  # Expect a string output, not a dictionary
+    output: str  # Expect a string output, not a dictionary
 
 
 
@@ -33,56 +33,51 @@ async def wire_function(request: GeminiRequest):
         else:
             print(f"Error: {response.message}")
         
-        return GeminiResponse(function_name=request.function_name, outputs=str(response.data))
+        return GeminiResponse(function_name=request.function_name, output=str(response.data))
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 
 ##################################################################################################
 
-class FunctionCRUDRequest(BaseModel):
-    name: str
-    code: str
+# Model for input data for functions like add_wire, update_wire, etc.
+class WireFunctionRequest(BaseModel):
+    function_name: str
+    inputs: List[str]  # List of input parameter names
+    description: str   # Description for the wire function
 
-@app.post("/execute", response_model=GeminiResponse)
-async def wire_function(request: GeminiRequest):
+# Model for output data
+class WireFunctionResponse(BaseModel):
+    message: str
+
+@app.post("/wire/add", response_model=WireFunctionResponse)
+async def create_wire(request: WireFunctionRequest):
     try:
-        response = execute(request.function_name, request.inputs)
-        if response.status != "success":
-            raise HTTPException(status_code=400, detail=response.message)
-        return GeminiResponse(function_name=request.function_name, outputs=str(response.data))
+        add_wire(request.function_name, request.inputs, request.description)
+        return WireFunctionResponse(message=f"Wire '{request.function_name}' added successfully.")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/function")
-async def create_function(request: FunctionCRUDRequest):
+@app.put("/wire/update", response_model=WireFunctionResponse)
+async def update_existing_wire(request: WireFunctionRequest):
     try:
-        add_function(request.name, request.code)
-        return {"message": f"Function '{request.name}' added successfully."}
+        update_wire(request.function_name, request.inputs, request.description)
+        return WireFunctionResponse(message=f"Wire '{request.function_name}' updated successfully.")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.put("/function")
-async def update_existing_function(request: FunctionCRUDRequest):
+@app.delete("/wire/delete/{function_name}", response_model=WireFunctionResponse)
+async def delete_existing_wire(function_name: str):
     try:
-        update_function(request.name, request.code)
-        return {"message": f"Function '{request.name}' updated successfully."}
+        delete_wire(function_name)
+        return WireFunctionResponse(message=f"Wire '{function_name}' deleted successfully.")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.delete("/function/{name}")
-async def delete_existing_function(name: str):
+@app.get("/wires", response_model=List[str])
+async def get_all_wires():
     try:
-        delete_function(name)
-        return {"message": f"Function '{name}' deleted successfully."}
+        wires = list_wires()
+        return wires
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
-@app.get("/functions")
-async def get_all_functions():
-    try:
-        return {"functions": list_functions()}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-##################################################################################################
