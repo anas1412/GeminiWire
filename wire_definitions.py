@@ -37,7 +37,3 @@ def fetch_users_with_skill(inputs: dict):
     skill = inputs.get('skill')
     return f"Generate an SQL query to fetch users who have the '{skill}' skill from mysql DB. Only send the sql query in plain text dont use commas."
 
-def multiply(inputs: dict):
-    num1 = inputs.get('num1')
-    num2 = inputs.get('num2')
-    return f'Multiply {num2} with {num1} and give only the result.'
