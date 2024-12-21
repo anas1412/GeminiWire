@@ -11,10 +11,12 @@ import os
 
 app = FastAPI()
 
-# Allow CORS for local development
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # React app origin
+    allow_origins=[
+        "http://localhost:5173",  # For local development
+        "https://gemini-wire-ui.vercel.app",  # Vercel frontend
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
