@@ -35,7 +35,6 @@ def add_wire(function_name: str, inputs: list, description: str):
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
 
-
 def update_wire(function_name: str, inputs: list, description: str):
     try:
         with open(FUNCTIONS_FILE, "r") as f:
@@ -45,11 +44,12 @@ def update_wire(function_name: str, inputs: list, description: str):
         pattern = rf"def {function_name}\(inputs: dict\):\n(    .*\n)*"
 
         # Check if the function exists
-        if not re.search(pattern, content):
+        match = re.search(pattern, content, re.MULTILINE)
+        if not match:
             raise ValueError(f"Function '{function_name}' not found.")
 
         # Remove the old function entirely (matching the function pattern)
-        updated_content = re.sub(pattern, "", content)
+        updated_content = re.sub(pattern, "", content, flags=re.MULTILINE)
 
         # Generate the new function code
         input_lines = ""
@@ -61,7 +61,7 @@ def update_wire(function_name: str, inputs: list, description: str):
         function_code = f"def {function_name}(inputs: dict):\n{input_lines}    return f'{description}'\n"
 
         # Add the new function code (replace the old one)
-        updated_content += function_code
+        updated_content += "\n" + function_code
 
         # Write the updated content back to the file
         with open(FUNCTIONS_FILE, "w") as f:
@@ -76,7 +76,6 @@ def update_wire(function_name: str, inputs: list, description: str):
         print(f"Error: {e}")
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
-
 
 def delete_wire(function_name: str):
     try:

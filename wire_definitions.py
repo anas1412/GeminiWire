@@ -39,3 +39,7 @@ def generate_character(inputs: dict):
 def test(inputs: dict):
     name = inputs.get('name')
     return f'Return a very short creative test messgae from {name} to test connectivity'
+def fetch_customers_by_product(inputs: dict):
+    product = inputs.get('product')
+    date = inputs.get('date')
+    return f'Generate me an sql query that fetchs a list of customers that bought a {product} in a specific date: {date} only send me the sql query'
