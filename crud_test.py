@@ -1,12 +1,11 @@
-import re
+import json
 from function_utils import load_functions
 from models import WireFunctionRequest
 
-import json
-
 FUNCTIONS_FILE = "wire_definitions.json"
 
-def add_wire(function_name: str, inputs: dict, description: str, prompt: str):
+def add_wire(function_name: str, inputs: Optional[dict], description: str, prompt: Optional[str]):
+    """Add a new wire function to the definitions."""
     try:
         with open(FUNCTIONS_FILE, "r") as f:
             data = json.load(f)
@@ -15,9 +14,9 @@ def add_wire(function_name: str, inputs: dict, description: str, prompt: str):
             raise ValueError(f"Function '{function_name}' already exists.")
 
         data[function_name] = {
-            "prompt": prompt,  # Use 'prompt' here
-            "description": description,  # Use 'description' here
-            "inputs": inputs
+            "prompt": prompt,
+            "description": description,
+            "inputs": inputs if inputs else {}
         }
 
         with open(FUNCTIONS_FILE, "w") as f:
@@ -26,11 +25,13 @@ def add_wire(function_name: str, inputs: dict, description: str, prompt: str):
         print(f"Function '{function_name}' added successfully.")
     except ValueError as e:
         print(f"Error: {e}")
+        raise
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
+        raise
 
-
-def update_wire(function_name: str, inputs: dict, description: str, prompt: str):
+def update_wire(function_name: str, inputs: Optional[dict], description: Optional[str], prompt: Optional[str]):
+    """Update an existing wire function in the definitions."""
     try:
         with open(FUNCTIONS_FILE, "r") as f:
             data = json.load(f)
@@ -38,31 +39,28 @@ def update_wire(function_name: str, inputs: dict, description: str, prompt: str)
         if function_name not in data:
             raise ValueError(f"Function '{function_name}' not found.")
 
-        # Get the existing function data
         existing_data = data[function_name]
-
-        # Update only the description and prompt while preserving the other fields (inputs)
         updated_data = {
-            "prompt": prompt if prompt else existing_data["prompt"],  # Update prompt if new prompt is provided
-            "description": description,  # Update description
-            "inputs": inputs if inputs else existing_data["inputs"]  # Only update inputs if they are provided
+            "prompt": prompt if prompt is not None else existing_data["prompt"],
+            "description": description if description is not None else existing_data["description"],
+            "inputs": inputs if inputs is not None else existing_data["inputs"]
         }
 
-        # Update the function data
         data[function_name] = updated_data
 
-        # Write the updated data back to the file
         with open(FUNCTIONS_FILE, "w") as f:
             json.dump(data, f, indent=4)
 
         print(f"Function '{function_name}' updated successfully.")
     except ValueError as e:
         print(f"Error: {e}")
+        raise
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
-
+        raise
 
 def delete_wire(function_name: str):
+    """Delete a wire function from the definitions."""
     try:
         with open(FUNCTIONS_FILE, "r") as f:
             data = json.load(f)
@@ -78,10 +76,13 @@ def delete_wire(function_name: str):
         print(f"Function '{function_name}' deleted successfully.")
     except ValueError as e:
         print(f"Error: {e}")
+        raise
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
+        raise
 
 def list_wires():
+    """List all wire function names."""
     try:
         with open(FUNCTIONS_FILE, "r") as f:
             data = json.load(f)
@@ -89,9 +90,10 @@ def list_wires():
         return list(data.keys())
     except Exception as e:
         print(f"An unexpected error occurred while listing functions: {e}")
-        return []
+        raise
 
 def fetch_wires():
+    """Fetch details of all wire functions."""
     try:
         with open(FUNCTIONS_FILE, "r") as f:
             data = json.load(f)
@@ -99,10 +101,10 @@ def fetch_wires():
         return data
     except Exception as e:
         print(f"An unexpected error occurred while listing functions: {e}")
-        return {}
-
+        raise
 
 def fetch_wire(function_name: str):
+    """Fetch details of a specific wire function."""
     try:
         with open(FUNCTIONS_FILE, "r") as f:
             data = json.load(f)
@@ -113,7 +115,7 @@ def fetch_wire(function_name: str):
         return data[function_name]
     except ValueError as e:
         print(f"Error: {e}")
-        return None
+        raise
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
-        return None
+        raise
