@@ -12,9 +12,16 @@ class GeminiResponse(BaseModel):
     message: Optional[str] = None
 
 class WireFunctionRequest(BaseModel):
-    function_name: str
-    inputs: List[str]  # List of input parameter names
-    description: str   # Description for the wire function
+    function_name: Optional[str] = None
+    inputs: Optional[Dict[str, str]] = None
+    description: Optional[str] = None
+    prompt: Optional[str] = None
 
 class WireFunctionResponse(BaseModel):
     message: str
+
+class WireFunctionDetails(BaseModel):
+    function_name: str
+    inputs: Dict[str, str]
+    description: str
+    prompt: str

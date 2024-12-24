@@ -1,11 +1,9 @@
 import os
-import inspect
-import wire_definitions
-from gemini_request import execute
-from function_utils import load_functions
 import hashlib
 import json
 import time
+from function_utils import load_functions
+from gemini_request import execute
 
 # Function registry populated dynamically
 function_registry = load_functions()
@@ -17,7 +15,7 @@ cache = {}
 CACHE_EXPIRATION_TIME = 900  # 15 minutes
 
 # Track the last modified time of the function definitions file
-FUNCTION_DEFINITIONS_FILE = "wire_definitions.py"
+FUNCTION_DEFINITIONS_FILE = "wire_definitions.json"
 last_mod_time = os.path.getmtime(FUNCTION_DEFINITIONS_FILE)
 
 def generate_cache_key(function_name, inputs):
@@ -43,13 +41,13 @@ def wire_function(function_name: str, inputs: dict):
 
     # Generate a cache key based on function_name and inputs
     cache_key = generate_cache_key(function_name, inputs)
-    
+
     # Check if the result is already cached
     if cache_key in cache:
         cache_entry = cache[cache_key]
         # Check if the cached result has expired
         elapsed_time = time.time() - cache_entry['timestamp']
-        
+
         # If the cache hasn't expired, return the cached result
         if elapsed_time < CACHE_EXPIRATION_TIME:
             print(f"Cache hit for function '{function_name}' with inputs {inputs}. Elapsed time: {elapsed_time:.2f}s")
@@ -60,7 +58,7 @@ def wire_function(function_name: str, inputs: dict):
         del cache[cache_key]
 
     print(f"Cache miss for function '{function_name}' with inputs {inputs}")
-    
+
     # Execute the function via Gemini API (execute is expected to be defined elsewhere)
     result = execute(function_name, inputs)
     print(f"Function executed. Result: {result}")
@@ -72,5 +70,5 @@ def wire_function(function_name: str, inputs: dict):
     else:
         # Handle the case where the result is None (e.g., function didn't return a value)
         print(f"No result returned for function '{function_name}' with inputs {inputs}")
-    
+
     return result
