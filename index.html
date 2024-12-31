@@ -10,16 +10,13 @@
       rel="stylesheet"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
       :root {
         --primary-color: #3b82f6;
         --secondary-color: #10b981;
       }
       body {
-        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-          sans-serif;
+        font-family: "Inter", sans-serif;
         scroll-behavior: smooth;
       }
       .code-block {
@@ -39,37 +36,36 @@
     </style>
   </head>
   <body class="bg-gray-50 text-gray-900 antialiased">
+    <!-- Navigation -->
     <nav class="bg-white shadow-md">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-          <div class="flex">
-            <div class="flex-shrink-0 flex items-center">
-              <h1 class="text-2xl font-bold text-blue-600">GeminiWire</h1>
-            </div>
-            <div class="hidden sm:ml-6 sm:flex sm:space-x-8 mt-3">
-              <a
-                href="#features"
-                class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
-                >Features</a
-              >
-              <a
-                href="#setup"
-                class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
-                >Setup</a
-              >
-              <a
-                href="#examples"
-                class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
-                >Examples</a
-              >
-              <a
-                href="#roadmap"
-                class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
-                >Roadmap</a
-              >
-            </div>
+        <div class="flex justify-between h-16 items-center">
+          <div class="flex items-center">
+            <h1 class="text-2xl font-bold text-blue-600">GeminiWire</h1>
           </div>
-          <div class="hidden sm:ml-6 sm:flex sm:items-center">
+          <div class="hidden sm:flex sm:space-x-8">
+            <a
+              href="#features"
+              class="text-gray-700 hover:text-blue-600 text-sm font-medium"
+              >Features</a
+            >
+            <a
+              href="#setup"
+              class="text-gray-700 hover:text-blue-600 text-sm font-medium"
+              >Setup</a
+            >
+            <a
+              href="#examples"
+              class="text-gray-700 hover:text-blue-600 text-sm font-medium"
+              >Examples</a
+            >
+            <a
+              href="#roadmap"
+              class="text-gray-700 hover:text-blue-600 text-sm font-medium"
+              >Roadmap</a
+            >
+          </div>
+          <div class="hidden sm:flex sm:items-center">
             <a
               href="https://gemini-wire-ui.vercel.app/"
               target="_blank"
@@ -82,53 +78,58 @@
       </div>
     </nav>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <header class="py-16 text-center">
-        <div class="max-w-4xl mx-auto">
-          <h1
-            class="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-400 mb-4"
+    <!-- Hero Section -->
+    <header class="py-16 text-center">
+      <div class="max-w-4xl mx-auto px-4">
+        <h1
+          class="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-400 mb-4"
+        >
+          GeminiWire
+        </h1>
+        <p class="text-xl text-gray-600 mb-8">
+          GeminiWire is a framework for defining, storing, and securely
+          executing AI-powered functions and workflows.
+        </p>
+        <div
+          class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4"
+        >
+          <a
+            href="https://gemini-wire-ui.vercel.app/"
+            target="_blank"
+            class="px-8 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition transform hover:-translate-y-1 shadow-lg"
           >
-            GeminiWire
-          </h1>
-          <p class="text-xl text-gray-600 mb-8">
-            A dynamic framework for defining, storing, and securely executing
-            custom AI-powered functions and workflows powered by Google's AI
-            capabilities.
-          </p>
-          <div class="flex justify-center space-x-4">
-            <a
-              href="https://gemini-wire-ui.vercel.app/"
-              target="_blank"
-              class="px-8 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition transform hover:-translate-y-1 shadow-lg"
+            Get Started
+          </a>
+          <a
+            href="https://github.com/anas1412/GeminiWire"
+            class="px-8 py-3 border border-gray-300 text-gray-700 rounded-full font-semibold hover:bg-gray-100 transition transform hover:-translate-y-1 shadow-md flex items-center justify-center"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 mr-2"
+              viewBox="0 0 24 24"
+              fill="currentColor"
             >
-              Get Started
-            </a>
-            <a
-              href="https://github.com/anas1412/GeminiWire"
-              class="px-8 py-3 border border-gray-300 text-gray-700 rounded-full font-semibold hover:bg-gray-100 transition transform hover:-translate-y-1 shadow-md flex items-center"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 mr-2"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M12 0C5.372 0 0 5.372 0 12c0 5.303 3.438 9.801 8.207 11.387.6.11.821-.261.821-.579 0-.287-.01-1.05-.015-2.062-3.338.727-4.043-1.589-4.043-1.589-.547-1.394-1.336-1.765-1.336-1.765-.987-.675.075-.661.075-.661 1.096.078 1.671 1.126 1.671 1.126.974 1.66 2.559 1.18 3.18.903.1-.705.381-1.18.692-1.453-2.666-.303-5.466-1.334-5.466-5.92 0-1.307.467-2.37 1.236-3.204-.124-.303-.535-.91-.075-1.887 0 0 1.004-.318 3.28 1.24.952-.264 1.974-.397 2.98-.403 1.005.006 2.027.139 2.98.403 2.276-1.558 3.28-1.24 3.28-1.24.46.977.05 1.584-.075 1.887.77.834 1.236 1.897 1.236 3.204 0 4.599-2.801 5.618-5.476 5.92.388.335.735.986.735 1.986 0 1.44-.015 2.604-.015 2.961 0 .319.222.692.825.578C20.565 21.801 24 17.303 24 12c0-6.628-5.372-12-12-12z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-              Github
-            </a>
-          </div>
+              <path
+                fill-rule="evenodd"
+                d="M12 0C5.372 0 0 5.372 0 12c0 5.303 3.438 9.801 8.207 11.387.6.11.821-.261.821-.579 0-.287-.01-1.05-.015-2.062-3.338.727-4.043-1.589-4.043-1.589-.547-1.394-1.336-1.765-1.336-1.765-.987-.675.075-.661.075-.661 1.096.078 1.671 1.126 1.671 1.126.974 1.66 2.559 1.18 3.18.903.1-.705.381-1.18.692-1.453-2.666-.303-5.466-1.334-5.466-5.92 0-1.307.467-2.37 1.236-3.204-.124-.303-.535-.91-.075-1.887 0 0 1.004-.318 3.28 1.24.952-.264 1.974-.397 2.98-.403 1.005.006 2.027.139 2.98.403 2.276-1.558 3.28-1.24 3.28-1.24.46.977.05 1.584-.075 1.887.77.834 1.236 1.897 1.236 3.204 0 4.599-2.801 5.618-5.476 5.92.388.335.735.986.735 1.986 0 1.44-.015 2.604-.015 2.961 0 .319.222.692.825.578C20.565 21.801 24 17.303 24 12c0-6.628-5.372-12-12-12z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Github
+          </a>
         </div>
-      </header>
+      </div>
+    </header>
 
-      <main>
-        <section id="features" class="grid md:grid-cols-3 gap-8 mb-16">
+    <!-- Features Section -->
+    <section id="features" class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center mb-8">Top Features</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Feature 1: Dynamic Function Chaining -->
           <div class="bg-white p-6 rounded-xl shadow-md feature-card">
             <div class="text-blue-600 text-3xl mb-4">
               <svg
@@ -148,9 +149,12 @@
             </div>
             <h3 class="text-xl font-bold mb-2">Dynamic Function Chaining</h3>
             <p class="text-gray-600">
-              Create and link AI-powered functions seamlessly
+              Create and link AI-powered functions seamlessly. Build complex
+              workflows by chaining multiple functions together.
             </p>
           </div>
+
+          <!-- Feature 2: Real-Time Data Processing -->
           <div class="bg-white p-6 rounded-xl shadow-md feature-card">
             <div class="text-green-600 text-3xl mb-4">
               <svg
@@ -164,16 +168,53 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
                 />
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-2">Gemini AI Integration</h3>
+            <h3 class="text-xl font-bold mb-2">Real-Time Data Processing</h3>
             <p class="text-gray-600">
-              Leverage Google's powerful AI capabilities
+              Process and analyze data in real-time using AI-powered functions.
+              Ideal for live dashboards and monitoring systems.
             </p>
           </div>
+
+          <!-- Feature 3: Customizable AI Models -->
           <div class="bg-white p-6 rounded-xl shadow-md feature-card">
+            <div class="text-indigo-600 text-3xl mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-12 w-12"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Customizable AI Models</h3>
+            <p class="text-gray-600">
+              Build, train, and deploy AI models tailored to your needs—like
+              chatbots, recommendation engines, or fraud detection—and integrate
+              them seamlessly into workflows for smarter automation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section id="use-cases" class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center mb-8">Use Cases</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Use Case 1: Multi-Language Support -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
             <div class="text-purple-600 text-3xl mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -186,578 +227,305 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                  d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
                 />
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-2">Workflow Automation</h3>
+            <h3 class="text-xl font-bold mb-2">Multi-Language Support</h3>
             <p class="text-gray-600">
-              Create complex AI-driven workflows effortlessly
+              Integrate functions in multiple programming languages. Use Python,
+              JavaScript, or any language with ease.
             </p>
           </div>
-        </section>
 
-        <section id="use-cases" class="mb-16">
-          <h2 class="text-3xl font-bold text-center mb-8">Use Cases</h2>
-          <div class="grid md:grid-cols-3 gap-8">
-            <!-- Use Case 1 -->
-            <div class="bg-white p-6 rounded-xl shadow-md flex items-start">
-              <div class="text-teal-500 mr-4">
-                <!-- Icon -->
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-12 w-12"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M8 7h8m-8 4h8m-8 4h6m-2 4h8"
-                  />
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-xl font-bold mb-2">
-                  Feature Prototyping with Precision
-                </h3>
-                <p class="text-gray-600">
-                  Test and visualize your product ideas using GeminiWire's
-                  AI-driven APIs before diving into development.
-                </p>
-              </div>
+          <!-- Use Case 2: Secure Execution Environment -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <div class="text-red-600 text-3xl mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-12 w-12"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                />
+              </svg>
             </div>
-
-            <!-- Use Case 2 -->
-            <div class="bg-white p-6 rounded-xl shadow-md flex items-start">
-              <div class="text-orange-500 mr-4">
-                <!-- Icon -->
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-12 w-12"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 6l4 8H8l4-8z"
-                  />
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-xl font-bold mb-2">
-                  Streamlined Quality Assurance
-                </h3>
-                <p class="text-gray-600">
-                  Identify issues early with AI-powered APIs, ensuring robust
-                  and reliable code quality every time.
-                </p>
-              </div>
-            </div>
-
-            <!-- Use Case 3 -->
-            <div class="bg-white p-6 rounded-xl shadow-md flex items-start">
-              <div class="text-pink-500 mr-4">
-                <!-- Icon -->
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-12 w-12"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M4 6h16M4 12h8m-8 6h12"
-                  />
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-xl font-bold mb-2">
-                  Instant Global Communication
-                </h3>
-                <p class="text-gray-600">
-                  Integrate GeminiWire to enable seamless real-time
-                  translations, connecting teams and audiences across borders.
-                </p>
-              </div>
-            </div>
-
-            <!-- Use Case 4 -->
-            <div class="bg-white p-6 rounded-xl shadow-md flex items-start">
-              <div class="text-blue-500 mr-4">
-                <!-- Icon -->
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-12 w-12"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M8 16l-4-4m0 0l4-4m-4 4h16"
-                  />
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-xl font-bold mb-2">
-                  Content Generation at Scale
-                </h3>
-                <p class="text-gray-600">
-                  Produce high-quality blogs, copy, and dynamic content quickly
-                  and efficiently with GeminiWire's AI-powered APIs.
-                </p>
-              </div>
-            </div>
-
-            <!-- Use Case 5 -->
-            <div class="bg-white p-6 rounded-xl shadow-md flex items-start">
-              <div class="text-green-500 mr-4">
-                <!-- Icon -->
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-12 w-12"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 17v-2a4 4 0 118 0v2m-8 0a4 4 0 018 0v2m-4-2v2m4-2a4 4 0 01-8 0v-2"
-                  />
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-xl font-bold mb-2">Dynamic AI Chatbots</h3>
-                <p class="text-gray-600">
-                  Transform customer interactions with intelligent, responsive
-                  chatbots that adapt to user needs in real time.
-                </p>
-              </div>
-            </div>
-
-            <!-- Use Case 6 -->
-            <div class="bg-white p-6 rounded-xl shadow-md flex items-start">
-              <div class="text-yellow-500 mr-4">
-                <!-- Icon -->
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-12 w-12"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
-                  />
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-xl font-bold mb-2">
-                  Optimized Workflow Automation
-                </h3>
-                <p class="text-gray-600">
-                  Streamline repetitive processes with AI-powered automation,
-                  saving time and maximizing efficiency.
-                </p>
-              </div>
-            </div>
-
-            <!-- Use Case 7 -->
-            <div class="bg-white p-6 rounded-xl shadow-md flex items-start">
-              <div class="text-purple-500 mr-4">
-                <!-- Icon -->
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-12 w-12"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 8c-2.28 0-4 2.69-4 6 0 3.31 1.72 6 4 6s4-2.69 4-6c0-3.31-1.72-6-4-6zm-2 2a2 2 0 114 0m6.25-4.75a3 3 0 110 6 3 3 0 010-6z"
-                  />
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-xl font-bold mb-2">Actionable Data Insights</h3>
-                <p class="text-gray-600">
-                  Leverage GeminiWire to analyze data, identify trends, and make
-                  smarter, data-driven decisions.
-                </p>
-              </div>
-            </div>
-
-            <!-- Use Case 8 -->
-            <div class="bg-white p-6 rounded-xl shadow-md flex items-start">
-              <div class="text-red-500 mr-4">
-                <!-- Icon -->
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-12 w-12"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M8 9l3-3m0 0l3 3m-3-3v12"
-                  />
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-xl font-bold mb-2">
-                  Seamless API Integrations
-                </h3>
-                <p class="text-gray-600">
-                  Enhance your applications with custom AI features through
-                  smooth, intelligent API integrations.
-                </p>
-              </div>
-            </div>
-
-            <!-- Use Case 9 -->
-            <div class="bg-white p-6 rounded-xl shadow-md flex items-start">
-              <div class="text-indigo-500 mr-4">
-                <!-- Icon -->
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-12 w-12"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M7 8h10M7 12h8m-8 4h6m-2-10h10m-4 4h4m-4 4h4m-4 4h4"
-                  />
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-xl font-bold mb-2">
-                  Personalized User Experiences
-                </h3>
-                <p class="text-gray-600">
-                  Utilize AI to deliver tailor-made recommendations, ensuring
-                  customers stay engaged and delighted.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="setup" class="mb-16">
-          <h2 class="text-3xl font-bold text-center mb-8">Getting Started</h2>
-          <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-white p-6 rounded-xl shadow-md">
-              <h3 class="text-xl font-semibold mb-4">Installation</h3>
-              <pre class="code-block"><code class="language-bash">
-# Clone the repository
-git clone https://github.com/anas1412/GeminiWire.git
-cd GeminiWire
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Configure API Key
-cp .env.example .env
-# Add your Gemini API key in .env
-
-# Start the service
-uvicorn server:app --reload
-                  </code></pre>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-md">
-              <h3 class="text-xl font-semibold mb-4">Project Structure</h3>
-              <pre class="code-block"><code class="language-bash">
-GeminiWire/
-│
-├── function_definitions.py  # Define custom functions
-├── server.py                # FastAPI server
-├── main.py                  # Main execution script
-├── requirements.txt         # Project dependencies
-└── .env                     # API key configuration
-└── ...                      # Rest of the project
-                  </code></pre>
-            </div>
-          </div>
-        </section>
-
-        <section id="examples" class="mb-16">
-          <h2 class="text-3xl font-bold text-center mb-8">Function Examples</h2>
-
-          <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-white p-6 rounded-xl shadow-md">
-              <h3 class="text-xl font-semibold mb-4">
-                Character Generation Function
-              </h3>
-              <pre class="code-block"><code class="language-python">
-# Function defined in function_definitions.p
-def generate_character(inputs: dict):
-    name = inputs.get('name')
-    gender = inputs.get('gender')
-    age = inputs.get('age')
-    return f"Generate anime character description for {name}, gender is {gender} and age is {age}"
-
-# Example Usage in main.py
-result = execute_function("generate_character", {
-    "name": "Alice",
-    "gender": "female",
-    "age": 22
-})
-                  </code></pre>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-md">
-              <h3 class="text-xl font-semibold mb-4">SQL Query Generation</h3>
-              <pre class="code-block"><code class="language-python">
-# Function defined in function_definitions.py
-def fetch_users_with_skill(inputs: dict):
-    skill = inputs.get('skill')
-    return f"Generate an SQL query to fetch users who have the '{skill}' skill from mysql DB. Only send the sql query in plain text dont use commas."
-
-# Example Usage in main.py
-sql_query = execute_function("fetch_users_with_skill", {
-    "skill": "Coding"
-})
-                  </code></pre>
-            </div>
-          </div>
-        </section>
-        <section id="examples" class="mb-16">
-          <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-white p-6 rounded-xl shadow-md">
-              <h3 class="text-xl font-semibold mb-4">
-                Character Generation Function Expected Output
-              </h3>
-              <pre class="code-block"><code class="language-yaml">
-result: Alice, 22, possesses striking, sapphire-blue eyes that hold a hint of mischievousness behind their usually calm demeanor.
-Her shoulder-length, silver hair is often braided, framing a delicate face with a slightly pointed chin.
-Clad in practical yet stylish clothing – often incorporating shades of blue and white – she carries herself with a quiet grace, belying a surprisingly sharp wit and hidden strength.
-                    </code></pre>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-md">
-              <h3 class="text-xl font-semibold mb-4">
-                SQL Query Generation Expected Output
-              </h3>
-              <pre class="code-block"><code class="language-bash">
-sql_query: SELECT * FROM users WHERE skills LIKE '%Coding%'
-                    </code></pre>
-            </div>
-          </div>
-        </section>
-        <section id="examples" class="mb-16">
-          <div class="mt-8 bg-white p-6 rounded-xl shadow-md">
-            <h3 class="text-xl font-semibold mb-4">Complex Workflow Example</h3>
-            <pre class="code-block"><code class="language-python">
-# Chaining multiple AI-powered functions
-character1 = execute_function("generate_character", {
-    "name": "Alice", "gender": "female", "age": 22
-}).data
-
-character2 = execute_function("generate_character", {
-    "name": "Anas", "gender": "male", "age": 27
-}).data
-
-plot = "Coding an AI framework that integrates dynamic function execution"
-
-world = execute_function("generate_world", {
-    "plot": plot,
-    "characters": [character1, character2]
-}).data
-
-print("Generated Narrative:", world)
-              </code></pre>
-          </div>
-        </section>
-
-        <section id="examples" class="mb-16">
-          <div class="mt-8 bg-white p-6 rounded-xl shadow-md">
-            <h3 class="text-xl font-semibold mb-4">
-              Complex Workflow Expected Output
-            </h3>
-            <pre class="code-block"><code class="language-yaml">
-Generated Narrative: The neon signs of Neo-Kyoto flickered across the rain-slicked streets as Alice hummed, her fingers dancing across the holographic keyboard projected from her wristband.  She was debugging a GeminiWire function – a complex spell, really, in the world of digital magic.  This one was designed to analyze environmental data gathered by her autonomous drone, "Kestrel," and predict the next ley line surge. Ley line surges, powerful bursts of magical energy, were both a blessing and a curse in Neo-Kyoto, fueling technology but also capable of causing catastrophic power outages.
-Tonight's surge was particularly unpredictable.  Alice's initial function, written in a blend of Python and GeminiWire's proprietary language, wasn’t precise enough.  She needed more processing power, a sharper AI eye.  That's where Anas came in.
-Anas, a renowned GeminiWire whisperer, arrived, his trench coat dripping onto the alley floor.  He’d been summoned by Alice’s frantic message, the urgency evident in her voice. He surveyed her code, his emerald eyes narrowed.
-"Too many nested loops," he murmured, his voice a low rumble.  "You're overloading the Gemini AI.  It's trying to process too much raw data before filtering."
-He pointed to a section of code. "This function, 'geomagnetic_fluctuation_analysis,' needs to be broken down. We need to chain it with a preliminary filtering function. Let’s use a simpler algorithm here, something more efficient."
-Alice nodded, already understanding.  Anas was right.  She'd been so focused on capturing every data point, she'd forgotten the importance of efficient data management.  Together, they began to refactor the code, using GeminiWire's intuitive interface.  Anas, with his experience, designed a series of smaller, highly optimized functions:  a preliminary data filter, a noise reduction function, and a refined geomagnetic analysis.  He chained them together using GeminiWire's elegant workflow system, leveraging fasAPI for seamless integration.
-Alice, meanwhile, used her intimate knowledge of Kestrel's data streams to fine-tune the parameters, ensuring the AI received the most relevant information.  The synergy between their skills was breathtaking.
-Within minutes, the revised function, a streamlined masterpiece of algorithmic elegance, was uploaded. The Gemini AI, fed by the now-optimized data, whirred to life, producing a precise prediction: the surge would hit the central power grid in exactly 27 minutes, originating from the abandoned Shibuya district.
-Alice and Anas exchanged a glance.  A faint smile touched Alice’s lips, the scar above her eyebrow barely visible under the flickering neon.  Anas, usually so reserved, allowed a hint of satisfaction to lighten the weariness in his eyes.  They had averted disaster. Their collaborative magic, powered by GeminiWire, had saved Neo-Kyoto.  The rain continued to fall, washing away the remnants of their struggle, leaving only the quiet hum of a city safe, thanks to their combined skill and a framework that allowed them to perform miracles with code.
-              </code></pre>
-          </div>
-        </section>
-
-        <section
-          class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16 rounded-xl mb-16"
-        >
-          <div class="max-w-3xl mx-auto text-center">
-            <h2 class="text-4xl font-bold mb-4">
-              Ready to Transform Your Workflows?
-            </h2>
-            <p class="text-xl mb-8">
-              Start building intelligent, AI-powered functions today
+            <h3 class="text-xl font-bold mb-2">Secure Execution Environment</h3>
+            <p class="text-gray-600">
+              Run functions in a sandboxed environment to ensure security and
+              prevent unauthorized access.
             </p>
-            <a
-              href="https://gemini-wire-ui.vercel.app/"
-              target="_blank"
-              class="px-10 py-4 bg-white text-blue-600 rounded-full font-bold hover:bg-gray-100 transition"
-            >
-              Get Started Now
-            </a>
           </div>
-        </section>
 
-        <section id="roadmap" class="mb-16">
-          <h2 class="text-3xl font-bold text-center mb-8">Todo List</h2>
-          <div class="bg-white p-8 rounded-xl shadow-md">
-            <ul class="space-y-4">
-              <li class="flex items-center">
-                <svg
-                  class="w-6 h-6 mr-3 text-green-500"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                <span>Implement caching for frequently used functions</span>
-              </li>
-              <li class="flex items-center">
-                <svg
-                  class="w-6 h-6 mr-3 text-gray-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                <span>Add NoSQL database for function registration</span>
-              </li>
-              <li class="flex items-center">
-                <svg
-                  class="w-6 h-6 mr-3 text-gray-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                <span>Implement user authentication system</span>
-              </li>
-              <li class="flex items-center">
-                <svg
-                  class="w-6 h-6 mr-3 text-gray-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                <span>Create user interface for function management</span>
-              </li>
-            </ul>
+          <!-- Use Case 3: Scalable Workflows -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <div class="text-yellow-600 text-3xl mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-12 w-12"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Scalable Workflows</h3>
+            <p class="text-gray-600">
+              Handle large-scale workflows with ease. Automate tasks for
+              thousands of users or data points.
+            </p>
           </div>
-        </section>
-      </main>
 
-      <footer class="bg-gray-100 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="md:flex md:justify-between">
-            <div class="mb-6 md:mb-0">
-              <h2 class="text-2xl font-bold text-blue-600 mb-4">GeminiWire</h2>
-              <p class="text-gray-600">Dynamic AI Function Framework</p>
+          <!-- Use Case 4: Automated Reporting -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <div class="text-blue-600 text-3xl mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-12 w-12"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
             </div>
-            <div class="grid grid-cols-2 gap-8 md:grid-cols-3">
-              <div>
-                <h3 class="text-sm font-semibold text-gray-800 uppercase mb-4">
-                  Community
-                </h3>
-                <ul class="text-gray-600">
-                  <li class="mb-2">
-                    <a
-                      href="https://www.cyberia.tn"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="hover:text-blue-600"
-                      >Cyberia Digital Studio</a
-                    >
-                  </li>
-                  <li class="mb-2">
-                    <a href="#" class="hover:text-blue-600">Twitter</a>
-                  </li>
-                  <li class="mb-2">
-                    <a href="#" class="hover:text-blue-600">Discord</a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h3 class="text-sm font-semibold text-gray-800 uppercase mb-4">
-                  Legal
-                </h3>
-                <ul class="text-gray-600">
-                  <li class="mb-2">
-                    <a href="pages/license.html" class="hover:text-blue-600"
-                      >MIT License</a
-                    >
-                  </li>
-                  <li class="mb-2">
-                    <a href="pages/policy.html" class="hover:text-blue-600"
-                      >Privacy Policy</a
-                    >
-                  </li>
-                  <li class="mb-2">
-                    <a href="pages/tos.html" class="hover:text-blue-600"
-                      >Terms of Service</a
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <h3 class="text-xl font-bold mb-2">Automated Reporting</h3>
+            <p class="text-gray-600">
+              Generate and distribute reports automatically. Pull data from
+              multiple sources, analyze it, and send insights to stakeholders.
+            </p>
           </div>
-          <div class="mt-8 border-t border-gray-200 pt-8 text-center">
-            <p class="text-base text-gray-600">
-              &copy; 2024 Cyberia Digital Studio. All rights reserved.
+
+          <!-- Use Case 5: Customer Support Automation -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <div class="text-green-600 text-3xl mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-12 w-12"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Customer Support Automation</h3>
+            <p class="text-gray-600">
+              Automate ticket creation, sentiment analysis, and response
+              generation to improve customer service efficiency.
+            </p>
+          </div>
+
+          <!-- Use Case 6: Predictive Analytics -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <div class="text-indigo-600 text-3xl mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-12 w-12"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Predictive Analytics</h3>
+            <p class="text-gray-600">
+              Use AI to forecast trends, demand, or risks. Make data-driven
+              decisions to stay ahead in your industry.
             </p>
           </div>
         </div>
-      </footer>
-    </div>
+      </div>
+    </section>
+
+    <!-- Examples Section -->
+    <section id="examples" class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center mb-8">Examples</h2>
+
+        <!-- Wires Examples -->
+        <div class="mb-16">
+          <h3 class="text-2xl font-bold mb-6">Wires: AI-Powered Functions</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Example 1: Character Generation -->
+            <div class="bg-white p-6 rounded-xl shadow-md">
+              <h4 class="text-xl font-semibold mb-4">Character Generation</h4>
+              <pre class="code-block"><code class="language-json">
+    // Request
+    {
+      "wire_id": "generate_character",
+      "inputs": {
+        "name": "Alice",
+        "gender": "female",
+        "age": 22
+      }
+    }
+    
+    // Response
+    {
+      "output": "Alice is a 22-year-old female with striking blue eyes and silver hair."
+    }
+              </code></pre>
+              <p class="text-gray-600 mt-4">
+                Use this wire to create detailed character descriptions for
+                storytelling, gaming, or creative writing.
+              </p>
+            </div>
+
+            <!-- Example 2: SQL Query Generation -->
+            <div class="bg-white p-6 rounded-xl shadow-md">
+              <h4 class="text-xl font-semibold mb-4">SQL Query Generation</h4>
+              <pre class="code-block"><code class="language-json">
+    // Request
+    {
+      "wire_id": "generate_sql_query",
+      "inputs": {
+        "skill": "Python"
+      }
+    }
+    
+    // Response
+    {
+      "output": "SELECT * FROM users WHERE skills LIKE '%Python%';"
+    }
+              </code></pre>
+              <p class="text-gray-600 mt-4">
+                Automate SQL query generation for database interactions, saving
+                time and reducing errors.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wireflows Examples -->
+        <div>
+          <h3 class="text-2xl font-bold mb-6">
+            Wireflows: AI-Powered Workflows
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Example 1: Customer Onboarding -->
+            <div class="bg-white p-6 rounded-xl shadow-md">
+              <h4 class="text-xl font-semibold mb-4">Customer Onboarding</h4>
+              <pre class="code-block"><code class="language-json">
+    // Request
+    {
+      "wireflow_id": "onboard_customer",
+      "inputs": {
+        "name": "John Doe",
+        "email": "john.doe@example.com"
+      }
+    }
+    
+    // Response
+    {
+      "output": {
+        "user_id": "12345",
+        "status": "Onboarding completed successfully."
+      }
+    }
+              </code></pre>
+              <p class="text-gray-600 mt-4">
+                Automate the customer onboarding process, from account creation
+                to assigning a support agent.
+              </p>
+            </div>
+
+            <!-- Example 2: Content Generation Pipeline -->
+            <div class="bg-white p-6 rounded-xl shadow-md">
+              <h4 class="text-xl font-semibold mb-4">
+                Content Generation Pipeline
+              </h4>
+              <pre class="code-block"><code class="language-json">
+    // Request
+    {
+      "wireflow_id": "generate_content",
+      "inputs": {
+        "keywords": "AI, Automation, GeminiWire"
+      }
+    }
+    
+    // Response
+    {
+      "output": {
+        "topic": "The Future of AI Automation with GeminiWire",
+        "status": "Content published successfully."
+      }
+    }
+              </code></pre>
+              <p class="text-gray-600 mt-4">
+                Streamline content creation by automating topic generation,
+                writing, and publishing.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center mb-8">Roadmap</h2>
+        <div class="bg-white p-8 rounded-xl shadow-md">
+          <ul class="space-y-4">
+            <li class="flex items-center">
+              <svg
+                class="w-6 h-6 mr-3 text-green-500"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span>Implement caching for frequently used functions</span>
+            </li>
+            <!-- Add more roadmap items here -->
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <p class="text-base text-gray-600">
+            &copy; 2024 Cyberia Digital Studio. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
 
     <script>
       hljs.highlightAll();
