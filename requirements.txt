@@ -1,6 +1,8 @@
+pymongo[srv]
 fastapi
 uvicorn
 requests
 pydantic
 python-dotenv
 globals
+motor
