@@ -117,7 +117,6 @@ async def delete_wireflow_route(wireflow_id: str):
 @app.get("/wireflows/", response_model=List[WireflowResponse])
 async def list_wireflows_route():
     return await list_wireflows()
-
 @app.post("/wireflows/execute", response_model=WireflowExecutionLog)
 async def execute_wireflow_route(request: ExecuteWireflowRequest):
     logger.info(f"Executing wireflow with ID: {request.wireflow_id}")
@@ -130,8 +129,12 @@ async def execute_wireflow_route(request: ExecuteWireflowRequest):
             logger.error(f"Wireflow not found with ID: {request.wireflow_id}")
             raise HTTPException(status_code=404, detail="Wireflow not found")
 
+        # Convert the WireflowResponse object to a WireflowSchema object
+        wireflow_dict = wireflow.dict()
+        wireflow_schema = WireflowSchema(**wireflow_dict)
+
         # Execute the wireflow
-        execution_log = await execute_wireflow(wireflow, request.inputs)
+        execution_log = await execute_wireflow(wireflow_schema, request.inputs)
         return execution_log
     except HTTPException as e:
         raise e

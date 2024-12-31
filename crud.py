@@ -155,8 +155,17 @@ async def get_wireflow(wireflow_id: str):
     wireflow["id"] = str(wireflow["_id"])
     del wireflow["_id"]
 
-    # Convert the dictionary to a WireflowSchema object
-    return WireflowSchema(**wireflow)
+    # Ensure the wires field is a list of dictionaries
+    if "wires" in wireflow and isinstance(wireflow["wires"], list):
+        # If wires is already a list of dictionaries, no conversion is needed
+        pass
+    else:
+        # If wires is not in the expected format, log an error and raise an exception
+        logger.error(f"Invalid wires format in wireflow with ID: {wireflow_id}")
+        raise HTTPException(status_code=500, detail="Invalid wireflow data format")
+
+    # Return the wireflow as a WireflowResponse object
+    return WireflowResponse(**wireflow)
 
 async def update_wireflow(wireflow_id: str, wireflow: WireflowSchemaUpdate):
     # Validate that all wires exist (if wires are provided)
@@ -170,14 +179,40 @@ async def update_wireflow(wireflow_id: str, wireflow: WireflowSchemaUpdate):
         logger.error("No fields to update")
         raise HTTPException(status_code=400, detail="No fields to update")
 
+    # Perform the update
     result = await get_db()["wireflows"].update_one(
-        {"wireflow_id": wireflow_id}, {"$set": update_data}
+        {"workflow_id": wireflow_id}, {"$set": update_data}  # Use "workflow_id" instead of "wireflow_id"
     )
+    logger.info(f"Update result: matched={result.matched_count}, modified={result.modified_count}")
+
     if result.matched_count == 0:
         logger.error(f"Wireflow not found with ID: {wireflow_id}")
         raise HTTPException(status_code=404, detail="Wireflow not found")
-    logger.info(f"Wireflow updated successfully: {result.modified_count} fields updated")
-    return {"updated_count": result.modified_count}
+
+    # Determine the new workflow_id if it was updated
+    new_workflow_id = update_data.get("workflow_id", wireflow_id)
+
+    # Fetch the updated wireflow using the new workflow_id
+    updated_wireflow = await get_db()["wireflows"].find_one({"workflow_id": new_workflow_id})
+    if not updated_wireflow:
+        logger.error(f"Failed to fetch updated wireflow with ID: {new_workflow_id}")
+        raise HTTPException(status_code=500, detail="Failed to fetch updated wireflow")
+
+    # Convert ObjectId to string and remove the "_id" field
+    updated_wireflow["id"] = str(updated_wireflow["_id"])
+    del updated_wireflow["_id"]
+
+    # Ensure the wires field is a list of dictionaries
+    if "wires" in updated_wireflow and isinstance(updated_wireflow["wires"], list):
+        # If wires is already a list of dictionaries, no conversion is needed
+        pass
+    else:
+        # If wires is not in the expected format, log an error and raise an exception
+        logger.error(f"Invalid wires format in wireflow with ID: {new_workflow_id}")
+        raise HTTPException(status_code=500, detail="Invalid wireflow data format")
+
+    # Return the updated wireflow as a WireflowResponse object
+    return WireflowResponse(**updated_wireflow)
 
 async def delete_wireflow(wireflow_id: str):
     logger.info(f"Deleting wireflow with ID: {wireflow_id}")
