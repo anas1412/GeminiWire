@@ -119,39 +119,13 @@ def generate_world(inputs: dict):
 2. Executing the request in main.py:
 
 ```python
-character1 = wire_function("generate_character", {"name": "Alice", "gender": "female", "age": 22}).data
 
-character2 = wire_function("generate_character", {"name": "Anas", "gender": "Male", "age": 27}).data
-
-charactersList = [character1, character2]
-
-plot = "Coding GeminiWire, a framework where users can define, store, and securely execute custom functions. It integrates AI (like Google Gemini) to process the functions, and users can chain multiple functions together to create automated workflows. Think of it as a dynamic system for creating and managing personalized logic powered by AI and fasAPI."
-
-world = wire_function("generate_world", {"plot": plot, "characters": charactersList}).data
-
-print("World result:", world)
 ```
 
 3. Expected Output:
 
 ```
-World result: The neon signs of Neo-Kyoto flickered across the rain-slicked streets as Alice hummed, her fingers dancing across the holographic keyboard projected from her wristband.  She was debugging a GeminiWire function – a complex spell, really, in the world of digital magic.  This one was designed to analyze environmental data gathered by her autonomous drone, "Kestrel," and predict the next ley line surge. Ley line surges, powerful bursts of magical energy, were both a blessing and a curse in Neo-Kyoto, fueling technology but also capable of causing catastrophic power outages.
 
-Tonight's surge was particularly unpredictable.  Alice's initial function, written in a blend of Python and GeminiWire's proprietary language, wasn't precise enough.  She needed more processing power, a sharper AI eye.  That's where Anas came in.
-
-Anas, a renowned GeminiWire whisperer, arrived, his trench coat dripping onto the alley floor.  He’d been summoned by Alice’s frantic message, the urgency evident in her voice. He surveyed her code, his emerald eyes narrowed.
-
-"Too many nested loops," he murmured, his voice a low rumble.  "You're overloading the Gemini AI.  It's trying to process too much raw data before filtering."
-
-He pointed to a section of code. "This function, 'geomagnetic_fluctuation_analysis,' needs to be broken down. We need to chain it with a preliminary filtering function. Let's use a simpler algorithm here, something more efficient."
-
-Alice nodded, already understanding.  Anas was right.  She'd been so focused on capturing every data point, she'd forgotten the importance of efficient data management.  Together, they began to refactor the code, using GeminiWire's intuitive interface.  Anas, with his experience, designed a series of smaller, highly optimized functions:  a preliminary data filter, a noise reduction function, and a refined geomagnetic analysis.  He chained them together using GeminiWire's elegant workflow system, leveraging fasAPI for seamless integration.
-
-Alice, meanwhile, used her intimate knowledge of Kestrel's data streams to fine-tune the parameters, ensuring the AI received the most relevant information.  The synergy between their skills was breathtaking.
-
-Within minutes, the revised function, a streamlined masterpiece of algorithmic elegance, was uploaded. The Gemini AI, fed by the now-optimized data, whirred to life, producing a precise prediction: the surge would hit the central power grid in exactly 27 minutes, originating from the abandoned Shibuya district.
-
-Alice and Anas exchanged a glance.  A faint smile touched Alice’s lips, the scar above her eyebrow barely visible under the flickering neon.  Anas, usually so reserved, allowed a hint of satisfaction to lighten the weariness in his eyes.  They had averted disaster. Their collaborative magic, powered by GeminiWire, had saved Neo-Kyoto.  The rain continued to fall, washing away the remnants of their struggle, leaving only the quiet hum of a city safe, thanks to their combined skill and a framework that allowed them to perform miracles with code.
 ```
 
 ### **Generating an SQL query that fetches users with a specific skill from a MySQL database**
