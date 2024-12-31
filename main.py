@@ -124,11 +124,13 @@ async def execute_wireflow_route(request: ExecuteWireflowRequest):
     logger.debug(f"Inputs provided: {request.inputs}")
 
     try:
+        # Fetch the wireflow from the database
         wireflow = await get_wireflow(request.wireflow_id)
         if not wireflow:
             logger.error(f"Wireflow not found with ID: {request.wireflow_id}")
             raise HTTPException(status_code=404, detail="Wireflow not found")
 
+        # Execute the wireflow
         execution_log = await execute_wireflow(wireflow, request.inputs)
         return execution_log
     except HTTPException as e:
@@ -136,8 +138,3 @@ async def execute_wireflow_route(request: ExecuteWireflowRequest):
     except Exception as e:
         logger.error(f"Unexpected error executing wireflow {request.wireflow_id}: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
-
-# Gemini /ask/ Endpoint
-@app.post("/ask/", response_model=SimplifiedGeminiResponse)
-async def ask_question(request: GeminiRequest):
-    return await ask_gemini(request.prompt)

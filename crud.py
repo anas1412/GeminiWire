@@ -150,10 +150,13 @@ async def get_wireflow(wireflow_id: str):
     if not wireflow:
         logger.error(f"Wireflow not found with ID: {wireflow_id}")
         raise HTTPException(status_code=404, detail="Wireflow not found")
+
+    # Convert ObjectId to string and remove the "_id" field
     wireflow["id"] = str(wireflow["_id"])
     del wireflow["_id"]
-    logger.info(f"Wireflow fetched successfully: {wireflow}")
-    return WireflowResponse(**wireflow)
+
+    # Convert the dictionary to a WireflowSchema object
+    return WireflowSchema(**wireflow)
 
 async def update_wireflow(wireflow_id: str, wireflow: WireflowSchemaUpdate):
     # Validate that all wires exist (if wires are provided)
@@ -234,7 +237,11 @@ async def execute_wire(wire_id: str, inputs: Dict[str, str]) -> WireExecutionLog
             executed_at=datetime.now().isoformat()
         )
 # Wireflow Execution Logic
-async def execute_wireflow(wireflow: WireflowSchema, inputs: Dict[str, str]) -> WireflowExecutionLog:
+async def execute_wireflow(wireflow: Union[WireflowSchema, Dict], inputs: Dict[str, str]) -> WireflowExecutionLog:
+    # If wireflow is a dictionary, convert it to a WireflowSchema object
+    if isinstance(wireflow, dict):
+        wireflow = WireflowSchema(**wireflow)
+
     wire_executions = []
     final_output = None
     dynamic_outputs = {}
