@@ -216,7 +216,7 @@ async def update_wireflow(wireflow_id: str, wireflow: WireflowSchemaUpdate):
 
 async def delete_wireflow(wireflow_id: str):
     logger.info(f"Deleting wireflow with ID: {wireflow_id}")
-    result = await get_db()["wireflows"].delete_one({"wireflow_id": wireflow_id})
+    result = await get_db()["wireflows"].delete_one({"workflow_id": wireflow_id})  # Use "workflow_id" instead of "wireflow_id"
     if result.deleted_count == 0:
         logger.error(f"Wireflow not found with ID: {wireflow_id}")
         raise HTTPException(status_code=404, detail="Wireflow not found")
