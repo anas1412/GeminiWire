@@ -1,176 +1,274 @@
 # GeminiWire
 
-## **Overview**
+## Project Overview
 
-**GeminiWire** is a framework where users can define, store, and securely execute custom prompts as functions. It integrates AI (specifically Google Gemini) to process the functions, and users can chain multiple functions together to create automated workflows. Think of it as a dynamic system for creating and managing personalized logic powered by AI and fasAPI.
+**GeminiWire** is a framework designed to enable users to define, store, and securely execute custom prompts as **wires** (individual functions) and chain them together to create **wireflows** (workflows). The system leverages **Google Gemini API** for AI-powered prompt processing, providing a dynamic and automated way to generate outputs based on user-defined logic. The backend is built using **FastAPI** and **MongoDB**, ensuring scalability, flexibility, and ease of use.
 
-## **Flow of Execution**
+---
 
-### **Step 1: Function Selection**
+## Key Features
 
-When a function is called through API or from main.py , **GeminiWire**:
+1. **Wires**:
 
-1.  Checks if the function exists in function_definitions.py.
-2.  If available, forwards the request to the Gemini API.
+   - Reusable functions that take dynamic inputs, process them using a prompt, and generate an output.
+   - Each wire has a unique `wire_id`, a `prompt` template, and a schema for inputs (including type, required flag, and description).
+   - Supports chaining, where the output of one wire can be used as input for another.
 
-### **Step 2: Prompt Preparation**
+2. **Wireflows**:
 
-If the request is sent to the Gemini API:
+   - Sequences of wires executed in a specific order.
+   - Each wireflow has a unique `workflow_id`, a description, and a list of wires with their inputs and output keys.
 
-- A dynamically generated prompt is crafted based on the function's logic.
+3. **Execution Context**:
 
-### **Step 3: API Interaction**
+   - A dictionary that stores the outputs of wires during the execution of a wireflow.
+   - Enables data flow between wires in a workflow.
 
-The crafted prompt is sent to the Gemini API, and the response is processed:
+4. **Database**:
 
-- If successful, the content is extracted and returned.
-- If unsuccessful, the error details are encapsulated in a GeminiResponse.
+   - Uses **MongoDB** to store wire definitions, wireflows, and execution logs.
+   - Provides persistence and efficient querying for managing wires and wireflows.
 
-### **Step 4: Response Delivery**
+5. **CRUD Operations**:
 
-The result is standardized into a GeminiResponse object, ensuring consistent output for both local and API-based executions.
+   - Full CRUD (Create, Read, Update, Delete) functionality for wires and wireflows.
+   - Ensures easy management of wires and wireflows through RESTful APIs.
 
-## **How to Use GeminiWire**
+6. **Error Handling and Logging**:
+   - Logs all wire and wireflow executions, including inputs, outputs, and status (success/failure).
+   - Provides detailed error messages for debugging and auditing.
 
-### **1\. Setting Up**
+---
 
-1.  Clone the repository.
-2.  Execute `pip install -r requirements.txt`
-3.  Copy the `.env.example` rename it to `.env`and put your `GEMINI_API_KEY=your_gemini_api_key`
+## Technical Stack
 
-### **2\. Running the Service**
+1. **Backend Framework**:
 
-1.  Run `uvicorn server:app --reload`
-2.  Access the API documentation at http://127.0.0.1:8000/docs.
+   - **FastAPI**: For building RESTful APIs with asynchronous support.
+   - **Pydantic**: For data validation and schema definition.
 
-### **3\. Defining a New Function inside function_definitions.py**
+2. **Database**:
 
-```python
-def generate_character(inputs: dict):
-    name = inputs.get('name')
-    gender = inputs.get('gender')
-    age = inputs.get('age')
-    return f"Generate a brief anime character description based on {name}, {gender}, {age}."
-```
+   - **Atlas MongoDB**: A NoSQL database for storing wires, wireflows, and execution logs.
+   - **Motor**: An asynchronous MongoDB driver for Python.
 
-### **4\. Executing Requests**
+3. **AI Integration**:
 
-#### Via FastAPI Endpoint:
+   - **Google Gemini API**: For processing prompts and generating outputs.
 
-Use http://localhost:8000/docs to execute the JSON payload or use any REST API client to send the request.
+4. **Environment Management**:
 
-Send a POST request to /execute with the following JSON payload:
+   - **Python-dotenv**: For managing environment variables (e.g., API keys, database URI).
+
+5. **Testing**:
+   - **Pytest**: For unit and integration testing.
+
+---
+
+## Database Schema
+
+The MongoDB database consists of three collections:
+
+### 1\. **Wires**
+
+Stores the definition of individual wires.
 
 ```json
 {
-  "function_name": "generate_character",
+  "wire_id": "string", // Unique identifier for the wire
+  "description": "string", // Brief description of the wire
+  "prompt": "string", // Prompt template for generating output
   "inputs": {
-    "name": "Alice",
-    "gender": "female",
-    "age": "22"
+    // Dictionary of input parameters
+    "input_key": {
+      "type": "string", // Data type of the input (e.g., string, integer)
+      "required": "boolean", // Whether the input is mandatory
+      "description": "string" // Description of the input
+    }
+  },
+  "chaining": {
+    // Chaining configuration
+    "allowed": "boolean", // Whether chaining is allowed
+    "output_key": "string" // Key for storing the output in the execution context
   }
 }
 ```
 
-#### Expected Response Example:
+### 2\. **Wireflows**
+
+Stores the definition of wireflows.
 
 ```json
 {
-  "function_name": "generate_character",
-  "outputs": "Alice, 22, possesses a captivating blend of ethereal beauty and quiet strength. Her long, silver hair often frames a delicate face with striking emerald eyes, hinting at a hidden depth.  While appearing initially soft-spoken and reserved, a determined set to her jaw and a flash of steel in her gaze betray a resilient spirit ready to face any challenge.  She favors flowing, pastel-colored clothing, yet carries herself with an air of subtle elegance that belies a surprising agility.\n"
+  "workflow_id": "string", // Unique identifier for the wireflow
+  "description": "string", // Brief description of the wireflow
+  "wires": [
+    // List of wires in the workflow
+    {
+      "wire_id": "string", // ID of the wire to execute
+      "inputs": {
+        // Inputs for the wire
+        "input_key": "string" // Can be a static value or a reference to a previous output (e.g., "$output_key")
+      },
+      "output_key": "string" // Key for storing the output in the execution context
+    }
+  ]
 }
 ```
 
-## **Testing the System**
+### 3\. **Execution Logs**
 
-### **Testing Locally**
+Logs the execution of wires and wireflows.
 
-Run the main.py file to execute and chain multiple operations:
-
-`python main.py`
-
-Add your function inside main.py
-
-```python
-character1 = wire_function("generate_character", {"name": "Alice", "gender": "female", "age": 22}).data
-print("Character result:", character1)
-
+```json
+{
+  "wire_id": "string", // ID of the wire executed (if applicable)
+  "workflow_id": "string", // ID of the wireflow executed (if applicable)
+  "inputs": {
+    // Inputs used for execution
+    "input_key": "string"
+  },
+  "outputs": "string", // Output generated by the wire
+  "status": "string", // Status of execution (SUCCESS/FAILURE)
+  "error_message": "string", // Error message (if execution failed)
+  "executed_at": "datetime" // Timestamp of execution
+}
 ```
 
-Example Output:
+---
 
-```
-Character result: Alice, 22, possesses striking, sapphire-blue eyes that hold a hint of mischievousness behind their usually calm demeanor. Her shoulder-length, silver hair is often braided, framing a delicate face with a slightly pointed chin.  Clad in practical yet stylish clothing – often incorporating shades of blue and white – she carries herself with a quiet grace, belying a surprisingly sharp wit and hidden strength.
-```
+## API Endpoints
 
-## **Adding New Functions (examples)**
+### 1\. **Wires**
 
-### **Generating anime world short story with a given plot and characters**
+- **POST /wires**: Create a new wire.
 
-1.  Adding the function to function_definitions.py
+- **GET /wires/{wire_id}**: Retrieve a wire by ID.
 
-```python
-def generate_world(inputs: dict):
-    plot = inputs.get('plot')
-    characters = ", ".join(map(str, inputs.get('characters', [])))
-    return f"Generate an anime world short story with {plot} and {characters}."
-```
+- **PUT /wires/{wire_id}**: Update a wire by ID.
 
-2. Executing the request in main.py:
+- **DELETE /wires/{wire_id}**: Delete a wire by ID.
 
-```python
+### 2\. **Wireflows**
 
-```
+- **POST /wireflows**: Create a new wireflow.
 
-3. Expected Output:
+- **GET /wireflows/{workflow_id}**: Retrieve a wireflow by ID.
 
-```
+- **PUT /wireflows/{workflow_id}**: Update a wireflow by ID.
 
-```
+- **DELETE /wireflows/{workflow_id}**: Delete a wireflow by ID.
 
-### **Generating an SQL query that fetches users with a specific skill from a MySQL database**
+### 3\. **Execution**
 
-1.  Adding the function to function_definitions.py
+- **POST /execute/wire**: Execute a single wire.
 
-```python
-def fetch_users_with_skill(inputs: dict):
-    skill = inputs.get('skill')
-    return f"Generate an SQL query to fetch users who have the '{skill}' skill from mysql DB. Only send the sql query in plain text dont use commas."
-```
+- **POST /execute/wireflow**: Execute a wireflow.
 
-2. Executing the request in main.py:
+---
 
-```python
-SQLquery = wire_function("fetch_users_with_skill", {"skill": "Cooking"}).data
-print("SQL query:", SQLquery)
-```
+## Execution Flow
 
-3. Expected Output
+### 1\. **Wire Execution**
 
-```bash
-SQL query: SELECT * FROM users WHERE skills LIKE '%Cooking%'
-```
+- Fetch the wire definition from the database.
 
-## **Error Handling**
+- Validate the inputs against the wire's input schema.
 
-1.  If a function is missing:
+- Format the prompt using the provided inputs.
 
-    - Error Message: Function '' not found in function_definitions.py.
+- Call the Google Gemini API to generate the output.
 
-2.  If the Gemini API fails:
+- Log the execution and return the output.
 
-    - Error Message: Error : .
+### 2\. **Wireflow Execution**
 
-3.  Validation errors for request inputs:
+- Fetch the wireflow definition from the database.
 
-    - Error Message: "Invalid input format: ".
+- Initialize an empty execution context.
 
-## **Future Enhancements**
+- For each wire in the wireflow:
 
-- [x] Implement caching for frequently used functions.
-- [ ] Extend function_definitions.py with more advanced NLP tasks
-- [ ] Add a noSQL database to register function_definitions and their inputs for each user.
-- [ ] Add a user authentication system to secure function calls.
-- [ ] Add a user interface for easy function management and execution.
-- [ ] Add detailed logging for debugging API and local function calls.
-- [ ] Support batch processing of multiple tasks in a single request.
+  - Prepare the inputs by replacing placeholders with values from the execution context.
+
+  - Execute the wire and store the output in the execution context.
+
+- Return the final execution context.
+
+---
+
+## Error Handling
+
+1.  **Validation Errors**:
+
+    - Missing or invalid inputs are flagged with a `400 Bad Request` response.
+
+2.  **Execution Errors**:
+
+    - Errors during wire or wireflow execution are logged and returned with a `500 Internal Server Error` response.
+
+3.  **Not Found Errors**:
+
+    - Missing wires or wireflows are flagged with a `404 Not Found` response.
+
+---
+
+## Testing
+
+1.  **Unit Tests**:
+
+    - Test individual components (e.g., wire execution, input validation).
+
+2.  **Integration Tests**:
+
+    - Test the end-to-end flow of wire and wireflow execution.
+
+3.  **Tools**:
+
+    - **Pytest**: For writing and running tests.
+
+    - **Postman**: For manual API testing.
+
+---
+
+## Deployment
+
+1.  **Backend**:
+
+    - Containerize the FastAPI app using **Docker**.
+
+    - Deploy to **Heroku**, **AWS**, or any other cloud platform.
+
+2.  **Database**:
+
+    - Use a managed MongoDB service like **MongoDB Atlas** or **AWS DocumentDB**.
+
+3.  **Environment Variables**:
+
+    - Store sensitive data (e.g., API keys, database URI) in `.env`.
+
+---
+
+## Future Enhancements
+
+1.  **Authentication**:
+
+    - Add user authentication to secure wire and wireflow execution.
+
+2.  **Workflow Management**:
+
+    - Allow users to define and manage complex workflows with conditional logic.
+
+3.  **UI Integration**:
+
+    - Build a React frontend for a user-friendly interface.
+
+4.  **Error Handling**:
+
+    - Improve error handling and provide detailed error messages to users.
+
+---
+
+## Conclusion
+
+**GeminiWire** is a robust and scalable framework for managing AI-powered workflows. The backend, built with **FastAPI** and **MongoDB**, provides a flexible and efficient solution for defining, executing, and managing wires and wireflows. The project adheres to best practices, ensuring clean code, modular design, and ease of maintenance.
