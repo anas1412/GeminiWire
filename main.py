@@ -20,7 +20,7 @@ from logger import logger  # Import the shared logger
 app = FastAPI(
     title="GeminiWire API",
     description="A simple API for executing wire functions and managing wireflows.",
-    version="0.5.1",
+    version="1.5.1",
 )
 
 # Get allowed origins from environment variables
@@ -48,18 +48,15 @@ async def shutdown_db_client():
     logger.info("Database client shut down successfully.")
 
 @app.get("/")
-async def home(request: Request):
-    def get_docs_url(request: Request) -> str:
-        return f"{request.url.scheme}://{request.client.host}:{request.url.port}/docs"
-    
-    def get_redoc_url(request: Request) -> str:
-        return f"{request.url.scheme}://{request.client.host}:{request.url.port}/redoc"
+async def home():
 
     return {
         "message": "Welcome to the GeminiWire API, your gateway to seamless wire and wireflow management and execution.",
-        "docs_url": get_docs_url(request),
-        "redoc_url": get_redoc_url(request)
     }
+
+@app.head("/")
+async def home_head():
+    return {}
 
 # Wire Routes
 @app.post("/wires/", response_model=WireResponse)
