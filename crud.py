@@ -124,9 +124,9 @@ async def create_wireflow(wireflow: WireflowSchema):
     wireflow_data = wireflow.dict()
 
     # Check if wireflow_id already exists
-    existing_wireflow = await get_db()["wireflows"].find_one({"workflow_id": wireflow_data["workflow_id"]})
+    existing_wireflow = await get_db()["wireflows"].find_one({"wireflow_id": wireflow_data["wireflow_id"]})
     if existing_wireflow:
-        logger.error(f"Wireflow with ID {wireflow_data['workflow_id']} already exists")
+        logger.error(f"Wireflow with ID {wireflow_data['wireflow_id']} already exists")
         raise HTTPException(status_code=400, detail="Wireflow with this ID already exists")
 
     result = await get_db()["wireflows"].insert_one(wireflow_data)
@@ -146,7 +146,7 @@ async def create_wireflow(wireflow: WireflowSchema):
 
 async def get_wireflow(wireflow_id: str):
     logger.info(f"Fetching wireflow with ID: {wireflow_id}")
-    wireflow = await get_db()["wireflows"].find_one({"workflow_id": wireflow_id})
+    wireflow = await get_db()["wireflows"].find_one({"wireflow_id": wireflow_id})
     if not wireflow:
         logger.error(f"Wireflow not found with ID: {wireflow_id}")
         raise HTTPException(status_code=404, detail="Wireflow not found")
@@ -181,7 +181,7 @@ async def update_wireflow(wireflow_id: str, wireflow: WireflowSchemaUpdate):
 
     # Perform the update
     result = await get_db()["wireflows"].update_one(
-        {"workflow_id": wireflow_id}, {"$set": update_data}  # Use "workflow_id" instead of "wireflow_id"
+        {"wireflow_id": wireflow_id}, {"$set": update_data}  # Use "wireflow_id" instead of "wireflow_id"
     )
     logger.info(f"Update result: matched={result.matched_count}, modified={result.modified_count}")
 
@@ -189,13 +189,13 @@ async def update_wireflow(wireflow_id: str, wireflow: WireflowSchemaUpdate):
         logger.error(f"Wireflow not found with ID: {wireflow_id}")
         raise HTTPException(status_code=404, detail="Wireflow not found")
 
-    # Determine the new workflow_id if it was updated
-    new_workflow_id = update_data.get("workflow_id", wireflow_id)
+    # Determine the new wireflow_id if it was updated
+    new_wireflow_id = update_data.get("wireflow_id", wireflow_id)
 
-    # Fetch the updated wireflow using the new workflow_id
-    updated_wireflow = await get_db()["wireflows"].find_one({"workflow_id": new_workflow_id})
+    # Fetch the updated wireflow using the new wireflow_id
+    updated_wireflow = await get_db()["wireflows"].find_one({"wireflow_id": new_wireflow_id})
     if not updated_wireflow:
-        logger.error(f"Failed to fetch updated wireflow with ID: {new_workflow_id}")
+        logger.error(f"Failed to fetch updated wireflow with ID: {new_wireflow_id}")
         raise HTTPException(status_code=500, detail="Failed to fetch updated wireflow")
 
     # Convert ObjectId to string and remove the "_id" field
@@ -208,7 +208,7 @@ async def update_wireflow(wireflow_id: str, wireflow: WireflowSchemaUpdate):
         pass
     else:
         # If wires is not in the expected format, log an error and raise an exception
-        logger.error(f"Invalid wires format in wireflow with ID: {new_workflow_id}")
+        logger.error(f"Invalid wires format in wireflow with ID: {new_wireflow_id}")
         raise HTTPException(status_code=500, detail="Invalid wireflow data format")
 
     # Return the updated wireflow as a WireflowResponse object
@@ -216,7 +216,7 @@ async def update_wireflow(wireflow_id: str, wireflow: WireflowSchemaUpdate):
 
 async def delete_wireflow(wireflow_id: str):
     logger.info(f"Deleting wireflow with ID: {wireflow_id}")
-    result = await get_db()["wireflows"].delete_one({"workflow_id": wireflow_id})  # Use "workflow_id" instead of "wireflow_id"
+    result = await get_db()["wireflows"].delete_one({"wireflow_id": wireflow_id})
     if result.deleted_count == 0:
         logger.error(f"Wireflow not found with ID: {wireflow_id}")
         raise HTTPException(status_code=404, detail="Wireflow not found")
@@ -281,7 +281,7 @@ async def execute_wireflow(wireflow: Union[WireflowSchema, Dict], inputs: Dict[s
     final_output = None
     dynamic_outputs = {}
 
-    logger.info(f"Executing wireflow {wireflow.workflow_id} with inputs: {inputs}")
+    logger.info(f"Executing wireflow {wireflow.wireflow_id} with inputs: {inputs}")
 
     for wire in wireflow.wires:
         wire_inputs = {}
@@ -300,9 +300,9 @@ async def execute_wireflow(wireflow: Union[WireflowSchema, Dict], inputs: Dict[s
         wire_executions.append(wire_response)
         final_output = wire_response.output
 
-    logger.info(f"Wireflow {wireflow.workflow_id} executed successfully. Final output: {final_output}")
+    logger.info(f"Wireflow {wireflow.wireflow_id} executed successfully. Final output: {final_output}")
     return WireflowExecutionLog(
-        workflow_id=wireflow.workflow_id,
+        wireflow_id=wireflow.wireflow_id,
         inputs=inputs,
         wire_executions=wire_executions,
         final_output=final_output,

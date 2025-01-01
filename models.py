@@ -53,7 +53,7 @@ class WireflowWireSchema(BaseModel):
 
 # Wireflow Schema
 class WireflowSchema(BaseModel):
-    workflow_id: str = Field(..., example="greeting_workflow")
+    wireflow_id: str = Field(..., example="greeting_wireflow")
     description: str = Field(..., example="Generate a greeting using a random name")
     wires: List[WireflowWireSchema] = Field(
         ...,
@@ -74,7 +74,7 @@ class WireflowSchema(BaseModel):
 
 # Wireflow Schema Update
 class WireflowSchemaUpdate(BaseModel):
-    workflow_id: str | None = Field(None, example="greeting_workflow")
+    wireflow_id: str | None = Field(None, example="greeting_wireflow")
     description: str | None = Field(None, example="Generate a greeting using a random name")
     wires: List[WireflowWireSchema] | None = Field(
         None,
@@ -95,7 +95,7 @@ class ExecuteWireRequest(BaseModel):
     inputs: Dict[str, str] = Field(..., example={"name": "Alice"})
 
 class ExecuteWireflowRequest(BaseModel):
-    wireflow_id: str = Field(..., example="greeting_workflow")
+    wireflow_id: str = Field(..., example="greeting_wireflow")
     inputs: Dict[str, str] = Field(..., example={})
 
 #########################################################
@@ -109,7 +109,7 @@ class WireExecutionLog(BaseModel):
     executed_at: str  # Timestamp of execution
 
 class WireflowExecutionLog(BaseModel):
-    workflow_id: str
+    wireflow_id: str
     inputs: Dict[str, str]  # Initial inputs provided to the wireflow
     wire_executions: List[WireExecutionLog]  # Execution logs for each wire
     final_output: str  # Final output of the wireflow
@@ -130,6 +130,6 @@ class WireResponse(BaseModel):
 
 class WireflowResponse(BaseModel):
     id: str
-    workflow_id: str
+    wireflow_id: str
     description: str
     wires: List[Dict[str, Union[str, Dict[str, str]]]]
